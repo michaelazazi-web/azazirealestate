@@ -331,7 +331,7 @@ const styles = `
     background: ${C.navy}; text-align: center; padding: 32px 24px;
     font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.4); letter-spacing: 1px;
   }
-  .footer strong { color: ${C.blueLight}; font-weight: 600; }
+
   .required-star { color: #C0392B; margin-left: 2px; }
 `;
 
@@ -784,8 +784,7 @@ export default function App() {
         </div>
 
         <div className="footer">
-          <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"60px",width:"auto",display:"block",margin:"0 auto 10px",background:"transparent",mixBlendMode:"multiply"}} />
-          <strong>Michael Azazi Real Estate, LLC</strong> · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties
+          Michael Azazi Real Estate, LLC · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties
         </div>
 
       </div>
