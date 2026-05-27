@@ -567,7 +567,7 @@ export default function App() {
             <button className="btn-outline" onClick={() => scrollTo(".survey-section", "buyer")}>I Want to Buy</button>
           </div>
           <img
-            src="/images/headshot.jpg"
+            src="/images/NoBG.svg"
             alt="Michael Azazi"
             className="hero-headshot"
             style={{
@@ -575,8 +575,6 @@ export default function App() {
               height: "85%", maxHeight: "85%", width: "auto",
               objectFit: "contain", objectPosition: "bottom",
               pointerEvents: "none", userSelect: "none",
-              WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 30%)",
-              maskImage: "linear-gradient(to right, transparent 0%, black 30%)",
             }}
           />
         </section>
