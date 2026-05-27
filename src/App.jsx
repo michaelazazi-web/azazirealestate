@@ -791,8 +791,8 @@ export default function App() {
         <div className="footer">
           <div style={{width:"100%",textAlign:"center"}}>Michael Azazi Real Estate, LLC · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties</div>
           <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,width:"100%",marginTop:12}}>
-            <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{height:"36px",width:"auto",display:"block"}} />
-            <img src="/images/trans_realtor.png" alt="REALTOR®" style={{height:"36px",width:"auto",display:"block"}} />
+            <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{height:"36px",width:"auto",display:"block",filter:"brightness(0) invert(1)",opacity:0.6}} />
+            <img src="/images/trans_realtor.png" alt="REALTOR®" style={{height:"36px",width:"auto",display:"block",filter:"brightness(0) invert(1)",opacity:0.6}} />
           </div>
         </div>
 
