@@ -17,7 +17,7 @@ const C = {
   pageBg: "#F5F6FA",
   sectionAlt: "#FFFFFF",
   cardBg: "#FFFFFF",
-  navBg: "#0C0F24",
+  navBg: "#FFFFFF",
 };
 
 const styles = `
@@ -32,21 +32,22 @@ const styles = `
     display: flex; justify-content: space-between; align-items: center;
     padding: 18px 40px;
     background: ${C.navBg};
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid ${C.border};
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
   .nav-brand {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 17px; font-weight: 700; letter-spacing: 2.5px;
-    text-transform: uppercase; color: ${C.white};
+    text-transform: uppercase; color: ${C.navy};
   }
-  .nav-brand span { color: ${C.blueLight}; }
+  .nav-brand span { color: ${C.blue}; }
   .nav-links { display: flex; gap: 32px; }
   .nav-link {
     font-size: 11px; font-weight: 600; letter-spacing: 2px;
-    text-transform: uppercase; color: rgba(255,255,255,0.55);
+    text-transform: uppercase; color: ${C.muted};
     cursor: pointer; background: none; border: none; transition: color 0.2s;
   }
-  .nav-link:hover { color: ${C.white}; }
+  .nav-link:hover { color: ${C.navy}; }
   @media (max-width: 600px) { .nav { padding: 16px 20px; } .nav-links { gap: 18px; } }
 
   .hero {
@@ -368,9 +369,9 @@ const REVIEWS = [
 ];
 
 const SAMPLE_LISTINGS = [
-  { id: 1, status: "Active", price: "$325,000", address: "4590 Deer Run, Rock Hill, NC 29732", specs: "3 bd · 2 ba · 1,893 sqft · Built 1983", mlsLink: "#" },
-  { id: 2, status: "Active", price: "$350,000", address: "404 W Kerr St, Salisbury, NC 28144", specs: "7 bd · 4 ba · 4,899 sqft · Built 1900", mlsLink: "#" },
-  { id: 3, status: "Active", price: "$250,000", address: "505 E 6th St #1003, Charlotte, NC 28202", specs: "1 bd · 1 ba · 774 sqft · Built 2006", mlsLink: "#" },
+  { id: 1, status: "Active", price: "$325,000", address: "4590 Deer Run, Rock Hill, NC 29732", specs: "3 bd · 2 ba · 1,893 sqft · Built 1983", mlsLink: "#", image: "/images/4590DeerRun.jpeg" },
+  { id: 2, status: "Active", price: "$350,000", address: "404 W Kerr St, Salisbury, NC 28144", specs: "7 bd · 4 ba · 4,899 sqft · Built 1900", mlsLink: "#", image: "/images/404WKerr.jpeg" },
+  { id: 3, status: "Active", price: "$250,000", address: "505 E 6th St #1003, Charlotte, NC 28202", specs: "1 bd · 1 ba · 774 sqft · Built 2006", mlsLink: "#", image: "/images/505E6th.jpeg" },
 ];
 
 const YOUTUBE_URL = "";
@@ -510,7 +511,7 @@ export default function App() {
 
         <nav className="nav">
           <div className="nav-brand">
-            <img src="/images/Logo.svg" alt="Michael Azazi Real Estate" style={{height:"36px",display:"block"}} />
+            <img src="/images/Logo.svg" alt="Michael Azazi Real Estate" style={{height:"52px",display:"block"}} />
           </div>
           <div className="nav-links">
             <button className="nav-link" onClick={() => scrollTo(".listings-section")}>Listings</button>
