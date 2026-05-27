@@ -36,11 +36,15 @@ const styles = `
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
   .nav-brand {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 17px; font-weight: 700; letter-spacing: 2.5px;
-    text-transform: uppercase; color: ${C.navy};
+    display: flex; align-items: center; gap: 14px;
   }
-  .nav-brand span { color: ${C.blue}; }
+  .nav-brand-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    line-height: 1.15;
+  }
+  .nav-brand-name { font-size: 18px; color: ${C.navy}; display: block; }
+  .nav-brand-sub  { font-size: 13px; color: ${C.blue};  display: block; }
   .nav-links { display: flex; gap: 32px; }
   .nav-link {
     font-size: 11px; font-weight: 600; letter-spacing: 2px;
@@ -511,7 +515,11 @@ export default function App() {
 
         <nav className="nav">
           <div className="nav-brand">
-            <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"120px",width:"auto",display:"block"}} />
+            <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"48px",width:"auto",display:"block"}} />
+            <div className="nav-brand-text">
+              <span className="nav-brand-name">Michael Azazi</span>
+              <span className="nav-brand-sub">Real Estate</span>
+            </div>
           </div>
           <div className="nav-links">
             <button className="nav-link" onClick={() => scrollTo(".listings-section")}>Listings</button>
