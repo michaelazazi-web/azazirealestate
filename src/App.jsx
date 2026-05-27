@@ -562,17 +562,40 @@ export default function App() {
                 <p className="section-eyebrow">About</p>
                 <h2 className="section-title">Michael Azazi<br />Real Estate, LLC</h2>
                 <p className="section-sub">
-                  Michael Azazi Real Estate, LLC — Charlotte Metro, brokered by eXp Realty. Specializing in sellers who need a thoughtful, strategic approach — including estates and probate properties. No pressure, no scripts. Just honest guidance from someone who actually knows this market.
+                  Michael Azazi has been in the real estate industry since 2022, bringing a foundation built on years of property management experience. That background shaped everything: attention to detail, proactive communication, and a genuine commitment to solving problems before they become issues. As a certified Real Estate Negotiation Expert (RENE), Certified Probate Expert (CPE), and Certified Listing Specialist (CLS), Michael brings specialized skills to every transaction. Whether you are navigating an estate sale, competing in a tough market, or simply looking for someone who will fight for your bottom line, the credentials back it up. Based in Charlotte and licensed in both NC and SC, Michael's philosophy is straightforward: solve your unique problem, deliver a superior experience, and be a resource you can count on long after closing.
                 </p>
               </div>
               <div>
                 <div className="about-badge">✦ Probate Certified</div>
                 <div className="about-badge" style={{marginLeft: 8}}>✦ Negotiation Certified</div>
-                <p style={{marginTop: 24, fontSize: 14, fontWeight: 300, color: C.muted, lineHeight: 1.8}}>
-                  Licensed in North Carolina and South Carolina. Based in Charlotte. Focused on doing right by every client — whether that's a first-time buyer or a family navigating a difficult estate situation.
-                </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div style={{background: C.white, borderTop: `1px solid ${C.border}`}}>
+          <div className="section">
+            <p className="section-eyebrow">My Promise</p>
+            <h2 className="section-title">My Commitments to You</h2>
+            <ol style={{marginTop: 32, listStyle: "none", padding: 0, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "16px"}}>
+              {[
+                "Expert advice for your best decision.",
+                "100% forthcoming about price, condition, and what it takes to sell.",
+                "Always give you the truth.",
+                "Always act in your best interest.",
+                "Fight to get you the most for your home.",
+                "Use the most effective marketing strategies.",
+                "Communicate proactively.",
+                "Return calls, emails, and texts with urgency.",
+                "Spend every day searching for qualified buyers.",
+                "Never lock you into a long-term contract.",
+              ].map((text, i) => (
+                <li key={i} style={{display: "flex", alignItems: "flex-start", gap: 16, background: C.pageBg, borderRadius: 10, padding: "18px 20px", border: `1px solid ${C.border}`}}>
+                  <span style={{minWidth: 32, height: 32, borderRadius: "50%", background: C.blue, color: C.white, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 15, letterSpacing: 0.5, flexShrink: 0}}>{i + 1}</span>
+                  <span style={{fontSize: 15, fontWeight: 400, color: C.navy, lineHeight: 1.55, paddingTop: 4}}>{text}</span>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
 
