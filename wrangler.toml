@@ -5,8 +5,6 @@ name = "azazirealestate"
 compatibility_date = "2024-09-23"
 
 # ── Pages build settings ───────────────────────────────────────────────────
-[env.production]
-# These match what you set in the Cloudflare Dashboard
 # Never commit real secrets here — use `wrangler pages secret put <KEY>`
 
 # ── Optional: Cloudflare KV for lead storage ──────────────────────────────
