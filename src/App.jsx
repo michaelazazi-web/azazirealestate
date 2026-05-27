@@ -1,0 +1,669 @@
+import { useState } from "react";
+
+const C = {
+  navy: "#0C0F24",
+  navyLight: "#31303F",
+  blue: "#19469D",
+  blueMid: "#506CAA",
+  blueLight: "#91A3C9",
+  bluePale: "#E9EDF4",
+  grayMid: "#686672",
+  grayLight: "#D4D3D6",
+  white: "#FFFFFF",
+  offWhite: "#F5F6FA",
+  muted: "#506CAA",
+  border: "rgba(25,70,157,0.2)",
+  borderFaint: "rgba(12,15,36,0.1)",
+  pageBg: "#F5F6FA",
+  sectionAlt: "#FFFFFF",
+  cardBg: "#FFFFFF",
+  navBg: "#0C0F24",
+};
+
+const styles = `
+  @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@500;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: ${C.pageBg}; color: ${C.navy}; }
+  .site-wrapper { min-height: 100vh; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 40px;
+    background: ${C.navBg};
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: ${C.white};
+  }
+  .nav-brand span { color: ${C.blueLight}; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-link {
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.55);
+    cursor: pointer; background: none; border: none; transition: color 0.2s;
+  }
+  .nav-link:hover { color: ${C.white}; }
+  @media (max-width: 600px) { .nav { padding: 16px 20px; } .nav-links { gap: 18px; } }
+
+  .hero {
+    position: relative; min-height: 88vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 80px 40px;
+    background: ${C.navy};
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 75% 40%, rgba(25,70,157,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 10% 85%, rgba(80,108,170,0.15) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .hero-grid-line {
+    position: absolute; top: 0; bottom: 0;
+    width: 1px; background: rgba(25,70,157,0.3);
+    right: 38%;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: ${C.blueLight};
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 2px; background: ${C.blue};
+  }
+  .hero-headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 700; line-height: 0.95;
+    text-transform: uppercase; color: ${C.white};
+    max-width: 640px; margin-bottom: 28px;
+  }
+  .hero-headline em {
+    font-style: italic; font-family: 'Barlow', sans-serif;
+    font-weight: 300; color: ${C.blueLight};
+    display: block; font-size: 0.72em;
+    text-transform: none; letter-spacing: 1px;
+  }
+  .hero-sub {
+    font-size: 17px; font-weight: 300; color: ${C.grayLight};
+    max-width: 440px; line-height: 1.75; margin-bottom: 44px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: ${C.blue}; color: ${C.white};
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; padding: 16px 36px;
+    border: none; cursor: pointer; transition: all 0.22s;
+  }
+  .btn-primary:hover { background: ${C.blueMid}; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent; color: ${C.white};
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; padding: 16px 36px;
+    border: 1px solid rgba(255,255,255,0.25); cursor: pointer; transition: all 0.22s;
+  }
+  .btn-outline:hover { border-color: ${C.blueLight}; color: ${C.blueLight}; }
+
+  .proof-strip {
+    display: flex; justify-content: center; gap: 0;
+    background: ${C.white};
+    border-bottom: 1px solid ${C.bluePale};
+    flex-wrap: wrap;
+  }
+  .proof-item {
+    text-align: center; padding: 28px 40px;
+    border-right: 1px solid ${C.bluePale};
+    flex: 1; min-width: 120px;
+  }
+  .proof-item:last-child { border-right: none; }
+  .proof-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 700; color: ${C.blue}; letter-spacing: 1px;
+  }
+  .proof-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: ${C.grayMid}; margin-top: 5px;
+  }
+
+  .section { padding: 80px 40px; max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 10px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: ${C.blue};
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: ${C.blue}; }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(28px, 4vw, 46px); font-weight: 700;
+    text-transform: uppercase; color: ${C.navy}; margin-bottom: 14px;
+  }
+  .section-sub {
+    font-size: 16px; font-weight: 300; color: ${C.grayMid};
+    max-width: 520px; line-height: 1.75;
+  }
+
+  .about-section { background: ${C.white}; }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  }
+  @media (max-width: 700px) { .about-inner { grid-template-columns: 1fr; gap: 32px; } }
+  .about-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: ${C.bluePale}; border: 1px solid ${C.border};
+    padding: 8px 16px; font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; color: ${C.blue};
+    margin-bottom: 12px; margin-right: 8px;
+  }
+
+  .listings-section { background: ${C.pageBg}; padding: 2px 0; }
+  .listings-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; margin-top: 48px;
+  }
+  .listing-card {
+    background: ${C.white}; border: 1px solid ${C.bluePale};
+    overflow: hidden; transition: box-shadow 0.2s, border-color 0.2s;
+    box-shadow: 0 1px 4px rgba(12,15,36,0.06);
+  }
+  .listing-card:hover { border-color: ${C.blueLight}; box-shadow: 0 4px 16px rgba(25,70,157,0.12); }
+  .listing-img {
+    width: 100%; aspect-ratio: 16/9;
+    background: linear-gradient(135deg, ${C.bluePale} 0%, #dde3f0 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .listing-img-placeholder {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: ${C.blueLight};
+  }
+  .listing-status {
+    position: absolute; top: 14px; left: 14px;
+    font-size: 9px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 5px 10px;
+  }
+  .status-active { background: ${C.blue}; color: ${C.white}; }
+  .status-pending { background: ${C.grayLight}; color: ${C.grayMid}; }
+  .listing-body { padding: 22px 24px; }
+  .listing-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px; font-weight: 700; color: ${C.navy}; margin-bottom: 4px;
+  }
+  .listing-address { font-size: 14px; font-weight: 400; color: ${C.navyLight}; margin-bottom: 12px; }
+  .listing-specs { font-size: 11px; font-weight: 400; color: ${C.grayMid}; letter-spacing: 0.5px; }
+  .listing-cta {
+    display: inline-block; margin-top: 16px;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: ${C.blue}; cursor: pointer;
+    background: none; border: none; padding: 0; transition: color 0.2s;
+  }
+  .listing-cta:hover { color: ${C.navyLight}; }
+  .listings-empty {
+    grid-column: 1/-1; text-align: center; padding: 64px 24px;
+    border: 1px dashed ${C.blueLight}; color: ${C.grayMid};
+    font-size: 14px; font-weight: 300;
+  }
+
+  .reviews-section-wrap { background: ${C.white}; }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px; margin-top: 48px;
+  }
+  .review-card {
+    background: ${C.pageBg}; border: 1px solid ${C.bluePale};
+    padding: 28px; display: flex; flex-direction: column; gap: 14px;
+    box-shadow: 0 1px 4px rgba(12,15,36,0.05);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .review-card:hover { border-color: ${C.blueLight}; box-shadow: 0 4px 16px rgba(25,70,157,0.1); }
+  .review-stars { font-size: 16px; color: ${C.blue}; letter-spacing: 2px; }
+  .review-quote { font-size: 14px; font-weight: 300; color: ${C.navyLight}; line-height: 1.75; flex: 1; }
+  .review-footer { border-top: 1px solid ${C.bluePale}; padding-top: 14px; }
+  .review-name { font-size: 13px; font-weight: 600; color: ${C.navy}; letter-spacing: 0.5px; }
+  .review-meta { font-size: 11px; font-weight: 300; color: ${C.grayMid}; margin-top: 3px; }
+  .review-date { font-size: 10px; font-weight: 300; color: ${C.grayLight}; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
+  .reviews-aggregate { display: flex; align-items: center; gap: 12px; margin-top: 40px; padding-top: 28px; border-top: 1px solid ${C.bluePale}; }
+  .reviews-score { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 700; color: ${C.navy}; }
+  .reviews-stars { font-size: 18px; color: ${C.blue}; letter-spacing: 3px; }
+  .reviews-label { font-size: 11px; font-weight: 300; color: ${C.grayMid}; letter-spacing: 1px; }
+
+  .yt-section { background: ${C.navy}; }
+  .yt-inner { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+  .yt-section .section-eyebrow { color: ${C.blueLight}; }
+  .yt-section .section-eyebrow::before { background: ${C.blueLight}; }
+  .yt-section .section-title { color: ${C.white}; }
+  .yt-section .section-sub { color: ${C.grayLight}; }
+  .yt-embed-wrapper {
+    position: relative; padding-bottom: 56.25%;
+    height: 0; overflow: hidden; margin-top: 48px;
+    border: 1px solid rgba(25,70,157,0.4);
+  }
+  .yt-embed-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+  .yt-no-video {
+    margin-top: 48px; padding: 64px 24px;
+    border: 1px dashed rgba(255,255,255,0.1);
+    text-align: center; color: ${C.grayMid}; font-size: 14px; font-weight: 300;
+  }
+  .yt-no-video p { margin-top: 8px; font-size: 12px; color: ${C.blueLight}; }
+
+  .survey-section-wrap { background: ${C.white}; }
+  .survey-section { max-width: 700px; margin: 0 auto; padding: 80px 24px; }
+  .survey-header { text-align: center; margin-bottom: 48px; }
+  .survey-card {
+    background: ${C.pageBg}; border: 1px solid ${C.bluePale};
+    padding: 48px 40px; box-shadow: 0 2px 12px rgba(12,15,36,0.07);
+  }
+  @media (max-width: 520px) { .survey-card { padding: 32px 20px; } }
+  .type-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 36px; }
+  .type-btn {
+    padding: 16px; border: 1px solid ${C.bluePale};
+    background: ${C.white}; color: ${C.grayMid};
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer; transition: all 0.2s; text-align: center;
+  }
+  .type-btn:hover { border-color: ${C.blue}; color: ${C.blue}; }
+  .type-btn.active { background: ${C.blue}; border-color: ${C.blue}; color: ${C.white}; }
+  .form-group { margin-bottom: 22px; }
+  .form-label {
+    display: block; font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: ${C.blue}; margin-bottom: 9px;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; background: ${C.white};
+    border: 1px solid ${C.bluePale}; color: ${C.navy};
+    font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 400;
+    padding: 13px 16px; outline: none; transition: border-color 0.2s; appearance: none;
+  }
+  .form-input::placeholder { color: ${C.grayLight}; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: ${C.blue}; }
+  .form-select option { background: ${C.white}; color: ${C.navy}; }
+  .form-textarea { resize: vertical; min-height: 90px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+  .radio-group { display: flex; flex-direction: column; gap: 10px; }
+  .radio-option {
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; color: ${C.navyLight}; font-size: 14px; font-weight: 400;
+  }
+  .radio-option input { accent-color: ${C.blue}; width: 16px; height: 16px; cursor: pointer; }
+  .divider { height: 1px; background: ${C.bluePale}; margin: 28px 0; }
+  .submit-btn {
+    width: 100%; background: ${C.blue}; color: ${C.white};
+    font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 20px; border: none; cursor: pointer; margin-top: 12px; transition: all 0.22s;
+  }
+  .submit-btn:hover { background: ${C.navy}; }
+  .success-card {
+    background: ${C.pageBg}; border: 1px solid ${C.bluePale};
+    padding: 64px 40px; text-align: center;
+  }
+  .success-icon { font-size: 36px; margin-bottom: 20px; color: ${C.blue}; }
+  .success-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px; font-weight: 700; text-transform: uppercase;
+    color: ${C.navy}; margin-bottom: 12px;
+  }
+  .success-card p { font-size: 15px; font-weight: 300; color: ${C.grayMid}; line-height: 1.75; }
+  .footer {
+    background: ${C.navy}; text-align: center; padding: 32px 24px;
+    font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.4); letter-spacing: 1px;
+  }
+  .footer strong { color: ${C.blueLight}; font-weight: 600; }
+  .required-star { color: #C0392B; margin-left: 2px; }
+`;
+
+const REVIEWS = [
+  {
+    name: "Fernando H.",
+    role: "Buyer",
+    date: "February 2026",
+    quote: "We can't be more grateful to Michael for all the help he gave us in our first home purchase process. We never felt pressure and we always had accompaniment from him. We are looking forward to working with him again. 100% recommended!",
+  },
+  {
+    name: "Adrian G.",
+    role: "Seller",
+    date: "December 2025",
+    quote: "Michael was the best realtor for the sale of our home and build of our new home. Couldn't have asked for a better experience.",
+  },
+  {
+    name: "Kathy R.",
+    role: "Buyer",
+    date: "October 2025",
+    quote: "Michael Azazi was very professional, knowledgeable and always available to help whenever needed. He was proactive and was always looking out for our best interest.",
+  },
+  {
+    name: "Amy B.",
+    role: "Seller",
+    date: "September 2025",
+    quote: "Michael Azazi kept us updated on all events requested by our buyers. Michael was always professional, courteous and easy to work with; highly recommend.",
+  },
+  {
+    name: "Kathy B.",
+    role: "Facebook Review",
+    date: "2025",
+    quote: "He's very knowledgeable about real estate. He works hard for his clients to try and get everything they want and need. Kind and very easy to work with.",
+  },
+  {
+    name: "Tim D.",
+    role: "Facebook Review",
+    date: "2025",
+    quote: "I would recommend Michael highly. He is very ambitious and knowledgeable. He tries hard to get everything his clients need and want. He's very respectful and a go getter.",
+  },
+];
+
+const SAMPLE_LISTINGS = [
+  { id: 1, status: "Active", price: "$325,000", address: "4590 Deer Run, Rock Hill, NC 29732", specs: "3 bd · 2 ba · 1,893 sqft · Built 1983", mlsLink: "#" },
+  { id: 2, status: "Active", price: "$350,000", address: "404 W Kerr St, Salisbury, NC 28144", specs: "7 bd · 4 ba · 4,899 sqft · Built 1900", mlsLink: "#" },
+  { id: 3, status: "Active", price: "$250,000", address: "505 E 6th St #1003, Charlotte, NC 28202", specs: "1 bd · 1 ba · 774 sqft · Built 2006", mlsLink: "#" },
+];
+
+const YOUTUBE_URL = "";
+
+function getYouTubeId(url) {
+  if (!url) return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([^&?/\s]{11})/);
+  return match ? match[1] : null;
+}
+
+const sellerQuestions = [
+  { id: "timeline", label: "When are you looking to sell?", type: "select",
+    options: ["Within 30 days", "1–3 months", "3–6 months", "6–12 months", "Just exploring"] },
+  { id: "situation", label: "What best describes your situation?", type: "radio",
+    options: ["Standard sale", "Inherited property / estate", "Divorce or life change", "Relocation", "Investment property", "Other"] },
+  { id: "address", label: "Property address (approximate is fine)", type: "text", placeholder: "e.g. Charlotte, NC 28277" },
+  { id: "priceRange", label: "Estimated value range", type: "select",
+    options: ["Under $200K", "$200K–$350K", "$350K–$500K", "$500K–$750K", "$750K+", "Not sure"] },
+  { id: "agent", label: "Are you currently working with an agent?", type: "radio",
+    options: ["No, I'm not", "Yes, but open to options", "Yes, I have representation"] },
+  { id: "notes", label: "Anything else you'd like Michael to know?", type: "textarea", placeholder: "Optional" },
+];
+
+const buyerQuestions = [
+  { id: "timeline", label: "When are you looking to buy?", type: "select",
+    options: ["ASAP / actively searching", "1–3 months", "3–6 months", "6–12 months", "Just exploring"] },
+  { id: "priceRange", label: "Budget range", type: "select",
+    options: ["Under $250K", "$250K–$400K", "$400K–$600K", "$600K–$800K", "$800K+", "Not sure yet"] },
+  { id: "area", label: "Preferred area(s) in Charlotte Metro", type: "text",
+    placeholder: "e.g. Mint Hill, South Charlotte, Ballantyne" },
+  { id: "preapproved", label: "Are you pre-approved?", type: "radio",
+    options: ["Yes, I'm pre-approved", "No, but I'm ready to start", "Not sure where to begin"] },
+  { id: "type", label: "Property type", type: "radio",
+    options: ["Single family home", "Townhome / Condo", "Multi-family / Investment", "Land", "Open to anything"] },
+  { id: "notes", label: "Anything else you'd like Michael to know?", type: "textarea", placeholder: "Optional" },
+];
+
+function SurveyField({ q, value, onChange }) {
+  if (q.type === "text") return (
+    <div className="form-group">
+      <label className="form-label">{q.label}</label>
+      <input className="form-input" placeholder={q.placeholder} value={value || ""} onChange={e => onChange(q.id, e.target.value)} />
+    </div>
+  );
+  if (q.type === "select") return (
+    <div className="form-group">
+      <label className="form-label">{q.label}</label>
+      <select className="form-select" value={value || ""} onChange={e => onChange(q.id, e.target.value)}>
+        <option value="">Select one</option>
+        {q.options.map(o => <option key={o} value={o}>{o}</option>)}
+      </select>
+    </div>
+  );
+  if (q.type === "radio") return (
+    <div className="form-group">
+      <label className="form-label">{q.label}</label>
+      <div className="radio-group">
+        {q.options.map(o => (
+          <label key={o} className="radio-option">
+            <input type="radio" name={q.id} value={o} checked={value === o} onChange={() => onChange(q.id, o)} />
+            {o}
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+  if (q.type === "textarea") return (
+    <div className="form-group">
+      <label className="form-label">{q.label}</label>
+      <textarea className="form-textarea" placeholder={q.placeholder} value={value || ""} onChange={e => onChange(q.id, e.target.value)} />
+    </div>
+  );
+  return null;
+}
+
+export default function App() {
+  const [tab, setTab] = useState("seller");
+  const [answers, setAnswers] = useState({});
+  const [contact, setContact] = useState({ name: "", phone: "", email: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const questions = tab === "seller" ? sellerQuestions : buyerQuestions;
+  const ytId = getYouTubeId(YOUTUBE_URL);
+
+  const handleAnswer = (id, val) => setAnswers(prev => ({ ...prev, [id]: val }));
+  const handleContact = (f, v) => setContact(prev => ({ ...prev, [f]: v }));
+
+  const handleSubmit = async () => {
+    if (!contact.name || !contact.phone || !contact.email) return alert("Please enter your name, phone number, and email address.");
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: contact.name, phone: contact.phone, email: contact.email, type: tab, answers }),
+      });
+    } catch(e) { console.error(e); }
+    setSubmitted(true);
+    setTimeout(() => document.querySelector(".survey-section")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+  };
+
+  const scrollTo = (selector, type) => {
+    if (type) setTab(type);
+    setTimeout(() => document.querySelector(selector)?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+  };
+
+  return (
+    <>
+      <style>{styles}</style>
+      <div className="site-wrapper">
+
+        <nav className="nav">
+          <div className="nav-brand">Michael Azazi <span>Real Estate</span></div>
+          <div className="nav-links">
+            <button className="nav-link" onClick={() => scrollTo(".listings-section")}>Listings</button>
+            <button className="nav-link" onClick={() => scrollTo(".reviews-section-wrap")}>Reviews</button>
+            <button className="nav-link" onClick={() => scrollTo(".yt-section")}>Videos</button>
+            <button className="nav-link" onClick={() => scrollTo(".survey-section", "seller")}>Sell</button>
+            <button className="nav-link" onClick={() => scrollTo(".survey-section", "buyer")}>Buy</button>
+          </div>
+        </nav>
+
+        <section className="hero">
+          <div className="hero-grid-line" />
+          <p className="hero-eyebrow">Charlotte Metro · NC &amp; SC Licensed</p>
+          <h1 className="hero-headline">
+            Your Move,<br />
+            <em>Handled Right.</em>
+          </h1>
+          <p className="hero-sub">
+            Whether you're ready to sell or ready to buy, you deserve a strategist in your corner — not a salesperson.
+          </p>
+          <div className="hero-ctas">
+            <button className="btn-primary" onClick={() => scrollTo(".survey-section", "seller")}>I Want to Sell</button>
+            <button className="btn-outline" onClick={() => scrollTo(".survey-section", "buyer")}>I Want to Buy</button>
+          </div>
+        </section>
+
+        <div className="proof-strip">
+          {[["Charlotte", "Metro Market"], ["NC + SC", "Licensed"], ["eXp Realty", "Brokerage"], ["Probate", "Certified"]].map(([n, l]) => (
+            <div key={l} className="proof-item">
+              <div className="proof-num">{n}</div>
+              <div className="proof-label">{l}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="about-section">
+          <div className="section">
+            <div className="about-inner">
+              <div>
+                <p className="section-eyebrow">About</p>
+                <h2 className="section-title">Michael Azazi<br />Real Estate, LLC</h2>
+                <p className="section-sub">
+                  Michael Azazi Real Estate, LLC — Charlotte Metro, brokered by eXp Realty. Specializing in sellers who need a thoughtful, strategic approach — including estates and probate properties. No pressure, no scripts. Just honest guidance from someone who actually knows this market.
+                </p>
+              </div>
+              <div>
+                <div className="about-badge">✦ Probate Certified</div>
+                <div className="about-badge" style={{marginLeft: 8}}>✦ Negotiation Certified</div>
+                <p style={{marginTop: 24, fontSize: 14, fontWeight: 300, color: C.muted, lineHeight: 1.8}}>
+                  Licensed in North Carolina and South Carolina. Based in Charlotte. Focused on doing right by every client — whether that's a first-time buyer or a family navigating a difficult estate situation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="listings-section">
+          <div className="section">
+            <p className="section-eyebrow">Active Listings</p>
+            <h2 className="section-title">Current Properties</h2>
+            <p className="section-sub">Homes I'm representing right now in the Charlotte Metro area.</p>
+            <div className="listings-grid">
+              {SAMPLE_LISTINGS.length > 0 ? SAMPLE_LISTINGS.map(l => (
+                <div key={l.id} className="listing-card">
+                  <div className="listing-img">
+                    <span className={`listing-status status-${l.status.toLowerCase()}`}>{l.status}</span>
+                    <span className="listing-img-placeholder">Photo Coming Soon</span>
+                  </div>
+                  <div className="listing-body">
+                    <div className="listing-price">{l.price}</div>
+                    <div className="listing-address">{l.address}</div>
+                    <div className="listing-specs">{l.specs}</div>
+                    <button className="listing-cta" onClick={() => scrollTo(".survey-section", "buyer")}>
+                      Request Info →
+                    </button>
+                  </div>
+                </div>
+              )) : (
+                <div className="listings-empty">
+                  No active listings at the moment — check back soon.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="reviews-section-wrap">
+          <div className="section">
+            <p className="section-eyebrow">Client Reviews</p>
+            <h2 className="section-title">What Clients Say</h2>
+            <p className="section-sub">Verified reviews from real buyers and sellers in the Charlotte Metro area.</p>
+            <div className="reviews-grid">
+              {REVIEWS.map((r, i) => (
+                <div key={i} className="review-card">
+                  <div className="review-stars">{"★★★★★"}</div>
+                  <p className="review-quote">"{r.quote}"</p>
+                  <div className="review-footer">
+                    <div className="review-name">{r.name}</div>
+                    <div className="review-meta">{r.role}</div>
+                    <div className="review-date">{r.date}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="reviews-aggregate">
+              <span className="reviews-score">5.0</span>
+              <span className="reviews-stars">★★★★★</span>
+              <span className="reviews-label">Verified by RealSatisfied</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="yt-section">
+          <div className="yt-inner">
+            <p className="section-eyebrow">From the Channel</p>
+            <h2 className="section-title">Latest Video</h2>
+            <p className="section-sub">Real talk about the Charlotte market, the buying and selling process, and what nobody else is telling you.</p>
+            {ytId ? (
+              <div className="yt-embed-wrapper">
+                <iframe
+                  src={`https://www.youtube.com/embed/${ytId}`}
+                  title="Latest video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <div className="yt-no-video">
+                <div style={{fontSize: 32, marginBottom: 12}}>▶</div>
+                Video coming soon.
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="survey-section-wrap">
+          <div className="survey-section">
+            <div className="survey-header">
+              <p className="section-eyebrow" style={{justifyContent: "center"}}>Get in Touch</p>
+              <h2 className="section-title" style={{fontSize: "clamp(28px, 4vw, 40px)"}}>Let's Talk About<br />Your Situation</h2>
+              <p className="section-sub" style={{margin: "0 auto", textAlign: "center"}}>Takes 2 minutes. Michael personally reviews every submission.</p>
+            </div>
+            {submitted ? (
+              <div className="success-card">
+                <div className="success-icon">✦</div>
+                <h3>Got it, {contact.name.split(" ")[0]}.</h3>
+                <p>Michael will reach out within one business day.<br /><br />No pressure. No pitch. Just a real conversation.</p>
+              </div>
+            ) : (
+              <div className="survey-card">
+                <div className="type-toggle">
+                  <button className={`type-btn ${tab === "seller" ? "active" : ""}`} onClick={() => { setTab("seller"); setAnswers({}); }}>I'm Selling</button>
+                  <button className={`type-btn ${tab === "buyer" ? "active" : ""}`} onClick={() => { setTab("buyer"); setAnswers({}); }}>I'm Buying</button>
+                </div>
+                {questions.map(q => <SurveyField key={q.id} q={q} value={answers[q.id]} onChange={handleAnswer} />)}
+                <div className="divider" />
+                <p className="form-label" style={{marginBottom: 16}}>Your Contact Info</p>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Full Name <span className="required-star">*</span></label>
+                    <input className="form-input" placeholder="Jane Smith" value={contact.name} onChange={e => handleContact("name", e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Phone <span className="required-star">*</span></label>
+                    <input className="form-input" placeholder="(704) 555-0100" value={contact.phone} onChange={e => handleContact("phone", e.target.value)} />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Email <span className="required-star">*</span></label>
+                  <input className="form-input" placeholder="jane@email.com" value={contact.email} onChange={e => handleContact("email", e.target.value)} />
+                </div>
+                <button className="submit-btn" onClick={handleSubmit}>Contact Us →</button>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="footer">
+          <strong>Michael Azazi Real Estate, LLC</strong> · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties
+        </div>
+
+      </div>
+    </>
+  );
+}

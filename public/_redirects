@@ -1,0 +1,3 @@
+# Cloudflare Pages — SPA fallback routing
+# All routes that don't match a static file get served index.html
+/*    /index.html    200
