@@ -531,7 +531,6 @@ export default function App() {
         </nav>
 
         <section className="hero">
-          <div className="hero-grid-line" />
           <p className="hero-eyebrow">Charlotte Metro · NC &amp; SC Licensed</p>
           <h1 className="hero-headline">
             Your Move,<br />
@@ -544,6 +543,16 @@ export default function App() {
             <button className="btn-primary" onClick={() => scrollTo(".survey-section", "seller")}>I Want to Sell</button>
             <button className="btn-outline" onClick={() => scrollTo(".survey-section", "buyer")}>I Want to Buy</button>
           </div>
+          <img
+            src="/images/headshot.jpg"
+            alt="Michael Azazi"
+            style={{
+              position: "absolute", right: 0, bottom: 0,
+              height: "85%", maxHeight: "85%", width: "auto",
+              objectFit: "contain", objectPosition: "bottom",
+              pointerEvents: "none", userSelect: "none",
+            }}
+          />
         </section>
 
         <div className="proof-strip">
@@ -568,6 +577,14 @@ export default function App() {
               <div>
                 <div className="about-badge">✦ Probate Certified</div>
                 <div className="about-badge" style={{marginLeft: 8}}>✦ Negotiation Certified</div>
+                <div style={{marginTop: 28}}>
+                  <img
+                    src="/images/SP.jpg"
+                    alt="Michael Azazi South Park"
+                    style={{maxWidth: 280, width: "100%", borderRadius: 12, display: "block"}}
+                  />
+                  <p style={{marginTop: 8, fontSize: 13, fontStyle: "italic", color: C.muted}}>Yes, that's really me.</p>
+                </div>
               </div>
             </div>
           </div>
