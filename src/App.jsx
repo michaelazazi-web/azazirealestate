@@ -743,7 +743,7 @@ export default function App() {
         </div>
 
         <div className="footer">
-          <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"60px",width:"auto",display:"block",margin:"0 auto 10px"}} />
+          <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"60px",width:"auto",display:"block",margin:"0 auto 10px",background:"transparent",mixBlendMode:"multiply"}} />
           <strong>Michael Azazi Real Estate, LLC</strong> · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties
         </div>
 
