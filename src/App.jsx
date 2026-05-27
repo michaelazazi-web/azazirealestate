@@ -102,6 +102,8 @@ const styles = `
     max-width: 440px; line-height: 1.75; margin-bottom: 44px;
   }
   .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-headshot { display: block; }
+  @media (max-width: 768px) { .hero-headshot { display: none; } }
 
   .btn-primary {
     background: ${C.blue}; color: ${C.white};
@@ -546,6 +548,7 @@ export default function App() {
           <img
             src="/images/headshot.jpg"
             alt="Michael Azazi"
+            className="hero-headshot"
             style={{
               position: "absolute", right: 0, bottom: 0,
               height: "85%", maxHeight: "85%", width: "auto",
