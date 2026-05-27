@@ -511,7 +511,7 @@ export default function App() {
 
         <nav className="nav">
           <div className="nav-brand">
-            <img src="/images/Logo.svg" alt="Michael Azazi Real Estate" style={{height:"160px",width:"auto",display:"block"}} />
+            <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"72px",width:"auto",display:"block"}} />
           </div>
           <div className="nav-links">
             <button className="nav-link" onClick={() => scrollTo(".listings-section")}>Listings</button>
@@ -692,7 +692,7 @@ export default function App() {
         </div>
 
         <div className="footer">
-          <img src="/images/Logo.svg" alt="Michael Azazi Real Estate" style={{height:"60px",display:"block",margin:"0 auto 10px"}} />
+          <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"60px",width:"auto",display:"block",margin:"0 auto 10px"}} />
           <strong>Michael Azazi Real Estate, LLC</strong> · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties
         </div>
 
