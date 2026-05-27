@@ -330,7 +330,7 @@ const styles = `
   .footer {
     background: ${C.navy}; padding: 32px 24px;
     font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.4); letter-spacing: 1px;
-    display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;
+    display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap;
   }
 
   .required-star { color: #C0392B; margin-left: 2px; }
@@ -546,6 +546,10 @@ export default function App() {
             <button className="nav-link" onClick={() => scrollTo(".survey-section", "seller")}>Sell</button>
             <button className="nav-link" onClick={() => scrollTo(".survey-section", "buyer")}>Buy</button>
             <a href="tel:7044941953" style={{fontSize:"11px",fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",color:C.blue,textDecoration:"none"}}>(704) 494-1953</a>
+            <div style={{display:"flex",alignItems:"center",gap:8}}>
+              <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{height:"32px",width:"auto",display:"block"}} />
+              <img src="/images/trans_realtor.png" alt="REALTOR®" style={{height:"32px",width:"auto",display:"block"}} />
+            </div>
           </div>
         </nav>
 
@@ -785,8 +789,11 @@ export default function App() {
         </div>
 
         <div className="footer">
-          <span>Michael Azazi Real Estate, LLC · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties</span>
-          <img src="/images/trans_realtor.png" alt="REALTOR®" style={{height:"40px",width:"auto",display:"block",flexShrink:0}} />
+          <div style={{width:"100%",textAlign:"center"}}>Michael Azazi Real Estate, LLC · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties</div>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,width:"100%",marginTop:12}}>
+            <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{height:"36px",width:"auto",display:"block"}} />
+            <img src="/images/trans_realtor.png" alt="REALTOR®" style={{height:"36px",width:"auto",display:"block"}} />
+          </div>
         </div>
 
       </div>
