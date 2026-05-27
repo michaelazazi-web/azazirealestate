@@ -509,7 +509,9 @@ export default function App() {
       <div className="site-wrapper">
 
         <nav className="nav">
-          <div className="nav-brand">Michael Azazi <span>Real Estate</span></div>
+          <div className="nav-brand">
+            <img src="/images/Logo.svg" alt="Michael Azazi Real Estate" style={{height:"36px",display:"block"}} />
+          </div>
           <div className="nav-links">
             <button className="nav-link" onClick={() => scrollTo(".listings-section")}>Listings</button>
             <button className="nav-link" onClick={() => scrollTo(".reviews-section-wrap")}>Reviews</button>
@@ -575,7 +577,9 @@ export default function App() {
                 <div key={l.id} className="listing-card">
                   <div className="listing-img">
                     <span className={`listing-status status-${l.status.toLowerCase()}`}>{l.status}</span>
-                    <span className="listing-img-placeholder">Photo Coming Soon</span>
+                    {l.image
+                      ? <img src={l.image} alt={l.address} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} />
+                      : <span className="listing-img-placeholder">Photo Coming Soon</span>}
                   </div>
                   <div className="listing-body">
                     <div className="listing-price">{l.price}</div>
@@ -687,6 +691,7 @@ export default function App() {
         </div>
 
         <div className="footer">
+          <img src="/images/Logo.svg" alt="Michael Azazi Real Estate" style={{height:"28px",display:"block",margin:"0 auto 10px"}} />
           <strong>Michael Azazi Real Estate, LLC</strong> · eXp Realty · Charlotte Metro · NC &amp; SC · Not intended to solicit currently listed properties
         </div>
 

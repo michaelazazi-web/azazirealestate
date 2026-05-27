@@ -13,7 +13,7 @@
     "type": "Single Family",
     "mls": "CAR4590DR",
     "description": "Charming 3-bedroom home nestled in a quiet Rock Hill neighborhood. Features an open-concept living space, updated kitchen, and a spacious backyard perfect for entertaining.",
-    "image": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&auto=format&fit=crop"
+    "image": "/images/4590DeerRun.jpeg"
   },
   {
     "id": "2",
@@ -29,7 +29,7 @@
     "type": "Single Family",
     "mls": "CAR404WK",
     "description": "Stunning large-scale home offering incredible space and versatility. With 7 bedrooms and 4 baths across nearly 5,000 sq ft, this is ideal for large families or multi-generational living.",
-    "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&auto=format&fit=crop"
+    "image": "/images/404WKerr.jpeg"
   },
   {
     "id": "3",
@@ -45,6 +45,6 @@
     "type": "Condo",
     "mls": "CAR505E6",
     "description": "Sleek uptown Charlotte condo on the 10th floor. Enjoy stunning city views, an open kitchen with modern finishes, in-unit laundry, and access to building amenities — walkable to everything Uptown has to offer.",
-    "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&auto=format&fit=crop"
+    "image": "/images/505E6th.jpeg"
   }
 ]
