@@ -492,6 +492,21 @@ export default function App() {
   const handleAnswer = (id, val) => setAnswers(prev => ({ ...prev, [id]: val }));
   const handleContact = (f, v) => setContact(prev => ({ ...prev, [f]: v }));
 
+  const [valuation, setValuation] = useState({ address: "", city: "", name: "", phone: "", email: "" });
+  const [valuationSubmitted, setValuationSubmitted] = useState(false);
+  const handleValuationChange = (f, v) => setValuation(prev => ({ ...prev, [f]: v }));
+  const handleValuationSubmit = async () => {
+    if (!valuation.name || !valuation.phone || !valuation.email || !valuation.address) return alert("Please fill in all fields.");
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: valuation.name, phone: valuation.phone, email: valuation.email, type: "valuation", answers: { address: valuation.address, city: valuation.city } }),
+      });
+    } catch(e) { console.error(e); }
+    setValuationSubmitted(true);
+  };
+
   const handleSubmit = async () => {
     if (!contact.name || !contact.phone || !contact.email) return alert("Please enter your name, phone number, and email address.");
     try {
@@ -529,6 +544,7 @@ export default function App() {
             <button className="nav-link" onClick={() => scrollTo(".yt-section")}>Videos</button>
             <button className="nav-link" onClick={() => scrollTo(".survey-section", "seller")}>Sell</button>
             <button className="nav-link" onClick={() => scrollTo(".survey-section", "buyer")}>Buy</button>
+            <a href="tel:7044941953" style={{fontSize:"11px",fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",color:C.blue,textDecoration:"none"}}>(704) 494-1953</a>
           </div>
         </nav>
 
@@ -697,6 +713,31 @@ export default function App() {
                 Video coming soon.
               </div>
             )}
+          </div>
+        </div>
+
+        <div style={{background: C.navy, padding: "80px 24px"}}>
+          <div style={{maxWidth: 600, margin: "0 auto"}}>
+            {valuationSubmitted ? (
+              <div style={{textAlign: "center"}}>
+                <p className="section-eyebrow" style={{justifyContent: "center"}}>Request Received</p>
+                <h2 className="section-title" style={{color: C.white}}>You'll hear from Michael within 24 hours.</h2>
+              </div>
+            ) : (<>
+              <p className="section-eyebrow" style={{justifyContent: "center"}}>Free Home Valuation</p>
+              <h2 className="section-title" style={{color: C.white, marginBottom: 16}}>What Is Your Home Worth?</h2>
+              <p style={{fontSize: 16, fontWeight: 300, color: C.grayLight, lineHeight: 1.75, marginBottom: 36}}>
+                Enter your address and I'll send you a personalized home value analysis within 24 hours — no automated tools, just real local expertise.
+              </p>
+              <div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14}}>
+                <input className="form-input" style={{gridColumn: "1 / -1"}} placeholder="Street address" value={valuation.address} onChange={e => handleValuationChange("address", e.target.value)} />
+                <input className="form-input" style={{gridColumn: "1 / -1"}} placeholder="City" value={valuation.city} onChange={e => handleValuationChange("city", e.target.value)} />
+                <input className="form-input" placeholder="Your name" value={valuation.name} onChange={e => handleValuationChange("name", e.target.value)} />
+                <input className="form-input" placeholder="Phone number" value={valuation.phone} onChange={e => handleValuationChange("phone", e.target.value)} />
+                <input className="form-input" style={{gridColumn: "1 / -1"}} placeholder="Email address" value={valuation.email} onChange={e => handleValuationChange("email", e.target.value)} />
+              </div>
+              <button className="btn-primary" style={{marginTop: 20, width: "100%"}} onClick={handleValuationSubmit}>Get My Home Value →</button>
+            </>)}
           </div>
         </div>
 
