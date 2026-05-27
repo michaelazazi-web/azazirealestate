@@ -575,7 +575,6 @@ export default function App() {
               height: "85%", maxHeight: "85%", width: "auto",
               objectFit: "contain", objectPosition: "bottom",
               pointerEvents: "none", userSelect: "none",
-              mixBlendMode: "luminosity",
               WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 30%)",
               maskImage: "linear-gradient(to right, transparent 0%, black 30%)",
             }}
