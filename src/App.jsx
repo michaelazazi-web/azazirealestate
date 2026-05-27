@@ -511,7 +511,7 @@ export default function App() {
 
         <nav className="nav">
           <div className="nav-brand">
-            <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"72px",width:"auto",display:"block"}} />
+            <img src="/images/logo.png" alt="Michael Azazi Real Estate" style={{height:"120px",width:"auto",display:"block"}} />
           </div>
           <div className="nav-links">
             <button className="nav-link" onClick={() => scrollTo(".listings-section")}>Listings</button>
