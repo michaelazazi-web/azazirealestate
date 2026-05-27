@@ -437,6 +437,27 @@ function SurveyField({ q, value, onChange }) {
       </div>
     </div>
   );
+  if (q.type === "multi_select") return (
+    <div className="form-group">
+      <label className="form-label">{q.label}</label>
+      <div className="radio-group">
+        {q.options.map(o => (
+          <label key={o} className="radio-option">
+            <input
+              type="checkbox"
+              value={o}
+              checked={Array.isArray(value) && value.includes(o)}
+              onChange={e => {
+                const prev = Array.isArray(value) ? value : [];
+                onChange(q.id, e.target.checked ? [...prev, o] : prev.filter(v => v !== o));
+              }}
+            />
+            {o}
+          </label>
+        ))}
+      </div>
+    </div>
+  );
   if (q.type === "textarea") return (
     <div className="form-group">
       <label className="form-label">{q.label}</label>
