@@ -70,7 +70,7 @@ function buildHtml({ id, timestamp, type, name, phone, email, answers }) {
   <div style="max-width:620px;margin:32px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.1)">
 
     <div style="background:${ACCENT};padding:28px 32px">
-      <p style="margin:0;color:rgba(255,255,255,0.75);font-size:12px;text-transform:uppercase;letter-spacing:1px">Michael Azazi Real Estate LLC</p>
+      <p style="margin:0;color:rgba(255,255,255,0.75);font-size:12px;text-transform:uppercase;letter-spacing:1px">Michael Azazi Real Estate, Brokered by eXp Realty</p>
       <h1 style="margin:8px 0 0;color:#fff;font-size:22px;font-weight:700">New ${isBuyer ? '🏠 Buyer' : '💰 Seller'} Lead</h1>
       <p style="margin:6px 0 0;color:rgba(255,255,255,0.7);font-size:13px">${dateStr}</p>
     </div>

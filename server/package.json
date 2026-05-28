@@ -1,7 +1,7 @@
 {
   "name": "azazirealestate-server",
   "version": "1.0.0",
-  "description": "Express API server for Michael Azazi Real Estate LLC",
+  "description": "Express API server for Michael Azazi Real Estate, Brokered by eXp Realty",
   "type": "module",
   "main": "index.js",
   "scripts": {

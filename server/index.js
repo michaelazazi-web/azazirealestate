@@ -69,7 +69,7 @@ function buildLeadEmailHtml(lead) {
 
     <!-- Header -->
     <div style="background:${accentColor};padding:28px 32px">
-      <p style="margin:0;color:rgba(255,255,255,0.8);font-size:13px;text-transform:uppercase;letter-spacing:1px">Michael Azazi Real Estate LLC</p>
+      <p style="margin:0;color:rgba(255,255,255,0.8);font-size:13px;text-transform:uppercase;letter-spacing:1px">Michael Azazi Real Estate, Brokered by eXp Realty</p>
       <h1 style="margin:8px 0 0;color:#fff;font-size:22px;font-weight:700">New ${typeLabel} Lead</h1>
       <p style="margin:6px 0 0;color:rgba(255,255,255,0.75);font-size:14px">${new Date(lead.timestamp).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}</p>
     </div>
