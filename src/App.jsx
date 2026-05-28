@@ -45,6 +45,7 @@ const styles = `
   }
   .nav-brand-name { font-size: 18px; color: ${C.navy}; display: block; }
   .nav-brand-sub  { font-size: 13px; color: ${C.blue};  display: block; }
+  .nav-brand-brokered { font-size: 10px; color: ${C.grayMid}; display: block; letter-spacing: 1px; font-weight: 400; text-transform: uppercase; }
   .nav-links { display: flex; gap: 32px; }
   .nav-link {
     font-size: 11px; font-weight: 600; letter-spacing: 2px;
@@ -536,6 +537,7 @@ export default function App() {
             <div className="nav-brand-text">
               <span className="nav-brand-name">Michael Azazi</span>
               <span className="nav-brand-sub">Real Estate</span>
+              <span className="nav-brand-brokered">Brokered by eXp Realty</span>
             </div>
           </div>
           <div className="nav-links">
