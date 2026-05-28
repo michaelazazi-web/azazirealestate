@@ -594,7 +594,7 @@ export default function App() {
             <div className="about-inner">
               <div>
                 <p className="section-eyebrow">About</p>
-                <h2 className="section-title">Michael Azazi<br />Real Estate, LLC</h2>
+                <h2 className="section-title">Michael Azazi Real Estate,<br />Brokered by eXp Realty</h2>
                 <p className="section-sub">
                   Michael Azazi has been in the real estate industry since 2022, bringing a foundation built on years of property management experience. That background shaped everything: attention to detail, proactive communication, and a genuine commitment to solving problems before they become issues. As a certified Real Estate Negotiation Expert (RENE), Certified Probate Expert (CPE), and Certified Listing Specialist (CLS), Michael brings specialized skills to every transaction. Whether you are navigating an estate sale, competing in a tough market, or simply looking for someone who will fight for your bottom line, the credentials back it up. Based in Charlotte and licensed in both NC and SC, Michael's philosophy is straightforward: solve your unique problem, deliver a superior experience, and be a resource you can count on long after closing.
                 </p>
