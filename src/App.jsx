@@ -486,15 +486,14 @@ export default function App() {
   const [answers, setAnswers] = useState({});
   const [contact, setContact] = useState({ name: "", phone: "", email: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [valuation, setValuation] = useState({ address: "", city: "", name: "", phone: "", email: "" });
+  const [valuationSubmitted, setValuationSubmitted] = useState(false);
 
   const questions = tab === "seller" ? sellerQuestions : buyerQuestions;
   const ytId = getYouTubeId(YOUTUBE_URL);
 
   const handleAnswer = (id, val) => setAnswers(prev => ({ ...prev, [id]: val }));
   const handleContact = (f, v) => setContact(prev => ({ ...prev, [f]: v }));
-
-  const [valuation, setValuation] = useState({ address: "", city: "", name: "", phone: "", email: "" });
-  const [valuationSubmitted, setValuationSubmitted] = useState(false);
   const handleValuationChange = (f, v) => setValuation(prev => ({ ...prev, [f]: v }));
   const handleValuationSubmit = async () => {
     if (!valuation.name || !valuation.phone || !valuation.email || !valuation.address) return alert("Please fill in all fields.");
