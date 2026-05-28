@@ -53,6 +53,8 @@ const styles = `
     cursor: pointer; background: none; border: none; transition: color 0.2s;
   }
   .nav-link:hover { color: ${C.navy}; }
+  .nav-cta { background: ${C.blue}; color: #fff; border: none; border-radius: 6px; padding: 8px 16px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .nav-cta:hover { background: ${C.navy}; }
   @media (max-width: 600px) { .nav { padding: 16px 20px; } .nav-links { gap: 18px; } }
 
   .hero {
@@ -546,6 +548,7 @@ export default function App() {
             <button className="nav-link" onClick={() => scrollTo(".yt-section")}>Videos</button>
             <button className="nav-link" onClick={() => scrollTo(".survey-section", "seller")}>Sell</button>
             <button className="nav-link" onClick={() => scrollTo(".survey-section", "buyer")}>Buy</button>
+            <button className="nav-cta" onClick={() => scrollTo(".survey-section", "seller")}>Free Home Valuation</button>
             <a href="tel:7046593564" style={{fontSize:"22px",fontWeight:800,letterSpacing:"1px",color:C.blue,textDecoration:"none",fontFamily:"'Barlow Condensed',sans-serif"}}>(704) 659-3564</a>
             <div style={{display:"flex",alignItems:"center",gap:8}}>
               <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{height:"32px",width:"32px",objectFit:"contain",display:"block",verticalAlign:"middle"}} />
