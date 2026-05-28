@@ -546,7 +546,7 @@ export default function App() {
             <button className="nav-link" onClick={() => scrollTo(".yt-section")}>Videos</button>
             <button className="nav-link" onClick={() => scrollTo(".survey-section", "seller")}>Sell</button>
             <button className="nav-link" onClick={() => scrollTo(".survey-section", "buyer")}>Buy</button>
-            <a href="tel:7046593564" style={{fontSize:"16px",fontWeight:700,letterSpacing:"1px",color:C.blue,textDecoration:"none"}}>(704) 659-3564</a>
+            <a href="tel:7046593564" style={{fontSize:"22px",fontWeight:800,letterSpacing:"1px",color:C.blue,textDecoration:"none",fontFamily:"'Barlow Condensed',sans-serif"}}>(704) 659-3564</a>
             <div style={{display:"flex",alignItems:"center",gap:8}}>
               <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{height:"32px",width:"32px",objectFit:"contain",display:"block",verticalAlign:"middle"}} />
               <img src="/images/blackrealtor.jpg" alt="REALTOR®" style={{height:"45px",width:"45px",objectFit:"contain",display:"block",verticalAlign:"middle"}} />
