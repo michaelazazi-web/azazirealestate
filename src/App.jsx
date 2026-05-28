@@ -567,7 +567,7 @@ export default function App() {
             <button className="btn-outline" onClick={() => scrollTo(".survey-section", "buyer")}>I Want to Buy</button>
           </div>
           <img
-            src="/images/headshot.jpg"
+            src="/images/headshot-removebg-preview.png"
             alt="Michael Azazi"
             className="hero-headshot"
             style={{
@@ -575,7 +575,6 @@ export default function App() {
               height: "85%", maxHeight: "85%", width: "auto",
               objectFit: "contain", objectPosition: "bottom",
               pointerEvents: "none", userSelect: "none",
-              filter: "brightness(0.4) sepia(1) hue-rotate(180deg) saturate(3)",
             }}
           />
         </section>
