@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const C = {
   navy:      "#0c0f24",
@@ -70,7 +71,7 @@ const styles = `
     font-family: 'Roboto', sans-serif;
     font-size: 11px; font-weight: 400; letter-spacing: 2px;
     text-transform: uppercase; cursor: pointer; transition: background 0.2s;
-    white-space: nowrap;
+    white-space: nowrap; text-decoration: none; display: inline-block;
   }
   .nav-cta:hover { background: ${C.blueMid}; }
   @media (max-width: 768px) {
@@ -607,8 +608,12 @@ export default function App() {
           <button className="nav-link" onClick={() => scrollTo(".reviews-wrap")}>Reviews</button>
           <button className="nav-link" onClick={() => scrollTo(".survey-wrap", "seller")}>Sell</button>
           <button className="nav-link" onClick={() => scrollTo(".survey-wrap", "buyer")}>Buy</button>
+          <Link to="/schedule" className="nav-link" style={{ textDecoration: "none" }}>Schedule</Link>
           <div className="nav-cta-wrap">
-            <button className="nav-cta" onClick={() => scrollTo(".valuation-wrap")}>Free Home Valuation</button>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
+              <a href="/schedule" className="nav-cta">Schedule a Consultation</a>
+              <button className="nav-cta" onClick={() => scrollTo(".valuation-wrap")}>Free Home Valuation</button>
+            </div>
             <a href="tel:7046593564" className="nav-phone">(704) 659-3564</a>
           </div>
         </div>
