@@ -10,11 +10,13 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server:install": "cd server && npm install"
+    "server:install": "cd server && npm install",
+    "dev:wrangler": "concurrently -n \"vite,wrangler\" -c \"cyan,yellow\" \"vite\" \"wrangler pages dev --proxy 5173\""
   },
   "dependencies": {
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.16.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -26,6 +28,8 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
-    "vite": "^8.0.12"
+    "sharp": "^0.34.5",
+    "vite": "^8.0.12",
+    "wrangler": "^4.95.0"
   }
 }
