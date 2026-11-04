@@ -63,6 +63,7 @@ function answerRows(answers) {
 
 function buildHtml({ id, timestamp, type, name, phone, email, answers }) {
   const isBuyer = type === 'buyer'
+  const label = isBuyer ? '🏠 Buyer' : type === 'fsbo-guide' ? '📘 FSBO Guide Download' : '💰 Seller'
   const dateStr = new Date(timestamp).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })
 
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"></head>
@@ -71,7 +72,7 @@ function buildHtml({ id, timestamp, type, name, phone, email, answers }) {
 
     <div style="background:${ACCENT};padding:28px 32px">
       <p style="margin:0;color:rgba(255,255,255,0.75);font-size:12px;text-transform:uppercase;letter-spacing:1px">Michael Azazi Real Estate, Brokered by eXp Realty</p>
-      <h1 style="margin:8px 0 0;color:#fff;font-size:22px;font-weight:700">New ${isBuyer ? '🏠 Buyer' : '💰 Seller'} Lead</h1>
+      <h1 style="margin:8px 0 0;color:#fff;font-size:22px;font-weight:700">New ${label} Lead</h1>
       <p style="margin:6px 0 0;color:rgba(255,255,255,0.7);font-size:13px">${dateStr}</p>
     </div>
 
@@ -133,7 +134,7 @@ export async function onRequestPost({ request, env }) {
     if (resendKey) {
       const toEmail   = env.NOTIFICATION_EMAIL || FALLBACK_NOTIFY
       const fromEmail = env.FROM_EMAIL || 'onboarding@resend.dev'
-      const subject   = `New ${type === 'buyer' ? '🏠 Buyer' : '💰 Seller'} Lead — ${lead.name}`
+      const subject   = `New ${type === 'buyer' ? '🏠 Buyer' : type === 'fsbo-guide' ? '📘 FSBO Guide Download' : '💰 Seller'} Lead — ${lead.name}`
 
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',

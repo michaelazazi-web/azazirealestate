@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import probateTranscript from "../content/probate-transcript.txt?raw";
 import expiredTranscript from "../content/expired-transcript.txt?raw";
@@ -50,6 +50,13 @@ const VIDEO_PAGES = {
     ctaNote: "No pressure, no obligation. Keep selling it yourself if that's still the right fit.",
     transcript: fsboTranscript,
     disclaimer: "",
+    resource: {
+      eyebrow: "Free Resource",
+      title: "The For Sale By Owner Marketing Tool Kit",
+      text: "Ten practical steps for pricing, preparing, marketing, and negotiating your home on your own, plus the NC and SC disclosure forms you'll need. Free, no obligation.",
+      file: "/downloads/FSBO-Marketing-Tool-Kit-Michael-Azazi.pdf",
+      leadType: "fsbo-guide",
+    },
   },
 };
 
@@ -94,6 +101,16 @@ const styles = `
   .vl-cta:hover { background: ${C.blueMid}; transform: translateY(-1px); }
   .vl-cta-note { margin-top: 14px; font-size: 14px; color: ${C.muted}; }
 
+  .vl-res { background: ${C.card}; border: 1px solid ${C.border}; border-radius: 8px; padding: 32px; margin-bottom: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+  .vl-res .vl-res-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: ${C.blue}; margin-bottom: 10px; }
+  .vl-res h2 { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2; color: ${C.ink}; margin-bottom: 10px; }
+  .vl-res p { font-size: 14px; line-height: 1.7; color: ${C.body}; }
+  .vl-res form { display: flex; flex-direction: column; gap: 10px; }
+  .vl-res input { padding: 12px 14px; font-size: 15px; border: 1px solid ${C.border}; border-radius: 6px; font-family: inherit; }
+  .vl-res button, .vl-res .vl-dl { background: ${C.blue}; color: ${C.white}; border: none; border-radius: 4px; padding: 14px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; text-align: center; text-decoration: none; font-family: inherit; }
+  .vl-res button:disabled { opacity: 0.6; cursor: default; }
+  .vl-res small { font-size: 11px; color: ${C.muted}; line-height: 1.5; }
+  @media (max-width: 700px) { .vl-res { grid-template-columns: 1fr; padding: 24px; } }
   .vl-transcript { border-top: 1px solid ${C.border}; padding-top: 24px; }
   .vl-transcript summary { cursor: pointer; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: ${C.blue}; list-style: none; }
   .vl-transcript summary::-webkit-details-marker { display: none; }
@@ -117,6 +134,51 @@ const styles = `
     .vl-cta { padding: 16px 24px; font-size: 12px; }
   }
 `;
+
+function ResourceDownload({ r }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle");
+
+  async function submit(e) {
+    e.preventDefault();
+    if (!name.trim() || !email.trim()) return;
+    setStatus("sending");
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, type: r.leadType, answers: { resource: r.title, page: window.location.pathname } }),
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    setStatus("done");
+  }
+
+  return (
+    <section className="vl-res">
+      <div>
+        <p className="vl-res-eyebrow">{r.eyebrow}</p>
+        <h2>{r.title}</h2>
+        <p>{r.text}</p>
+      </div>
+      {status === "done" ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <p><strong>Thanks, {name.split(" ")[0]}.</strong> Your guide is ready.</p>
+          <a className="vl-dl" href={r.file} target="_blank" rel="noopener" download>Download the Free Guide</a>
+        </div>
+      ) : (
+        <form onSubmit={submit}>
+          <input type="text" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} required autoComplete="name" />
+          <input type="email" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)} required autoComplete="email" />
+          <button type="submit" disabled={status === "sending"}>{status === "sending" ? "One moment..." : "Get the Free Guide"}</button>
+          <small>Michael may follow up by email about your home sale. No spam, and you can opt out anytime.</small>
+        </form>
+      )}
+    </section>
+  );
+}
 
 export default function VideoLanding({ page }) {
   const p = VIDEO_PAGES[page];
@@ -182,6 +244,8 @@ export default function VideoLanding({ page }) {
           <Link to={`/schedule?source=${page}`} className="vl-cta">{p.cta}</Link>
           <p className="vl-cta-note">{p.ctaNote}</p>
         </div>
+
+        {p.resource && <ResourceDownload r={p.resource} />}
 
         <details className="vl-transcript">
           <summary>Read the transcript</summary>
