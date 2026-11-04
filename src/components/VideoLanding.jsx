@@ -154,7 +154,7 @@ export default function VideoLanding({ page }) {
             <img src="/images/exp-logo-white.svg" alt="eXp Realty" style={{ height: 13, width: "auto", marginTop: 4 }} />
           </div>
         </Link>
-        <a href="tel:7046593564" className="vl-phone">(704) 659-3564</a>
+        <a href="tel:7044941953" className="vl-phone">(704) 494-1953</a>
       </nav>
 
       <div className="vl-bg">
@@ -199,7 +199,7 @@ export default function VideoLanding({ page }) {
       <footer className="vl-footer">
         <div>Michael Azazi Real Estate · Brokered by eXp Realty · Licensed in NC &amp; SC</div>
         <div>
-          Michael: <a href="tel:7046593564">(704) 659-3564</a> · eXp Realty: <a href="tel:7042488230">(704) 248-8230</a> · <a href="mailto:michael@azazirealestate.com">michael@azazirealestate.com</a>
+          Michael: <a href="tel:7044941953">(704) 494-1953</a> · eXp Realty: <a href="tel:7042488230">(704) 248-8230</a> · <a href="mailto:michael@azazirealestate.com">michael@azazirealestate.com</a>
         </div>
         <div>Not intended to solicit currently listed properties or buyers under existing representation agreements</div>
         <div>Opinions are my own and not the views of eXp Realty</div>
