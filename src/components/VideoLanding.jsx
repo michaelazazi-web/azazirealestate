@@ -23,7 +23,7 @@ const VIDEO_PAGES = {
       "Michael Azazi is a licensed real estate broker, not an attorney. Nothing on this page is legal or tax advice. Please consult an estate attorney about legal questions regarding probate.",
   },
   expired: {
-    youtubeId: "",
+    youtubeId: "VGuz9-cQqeU",
     indexable: false,
     title: "Your Home Didn't Sell | Michael Azazi Real Estate",
     eyebrow: "For Homeowners Whose Listing Expired",
@@ -38,7 +38,7 @@ const VIDEO_PAGES = {
       "If your home is currently listed with another brokerage, please disregard this page. It is not a solicitation of your listing.",
   },
   fsbo: {
-    youtubeId: "",
+    youtubeId: "pYEMvmLkX3Y",
     indexable: false,
     title: "Selling Your Home Yourself? | Michael Azazi Real Estate",
     eyebrow: "For Homeowners Selling On Their Own",
