@@ -1,3 +1,4 @@
-# Cloudflare Pages — SPA fallback routing
-# All routes that don't match a static file get served index.html
-/*    /index.html    200
+# Intentionally empty.
+# Cloudflare Pages serves index.html for unknown routes automatically (SPA mode,
+# active because there is no top-level 404.html). A "/* /index.html 200" rule here
+# could override pre-rendered pages like /probate/index.html, so it was removed.

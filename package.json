@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev:api": "cd server && node index.js",
     "dev:all": "concurrently -n \"vite,api\" -c \"cyan,yellow\" \"vite\" \"cd server && node index.js\"",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "server:install": "cd server && npm install",

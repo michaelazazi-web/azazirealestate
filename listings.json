@@ -46,5 +46,21 @@
     "mls": "CAR505E6",
     "description": "Sleek uptown Charlotte condo on the 10th floor. Enjoy stunning city views, an open kitchen with modern finishes, in-unit laundry, and access to building amenities — walkable to everything Uptown has to offer.",
     "image": "/images/505E6th.jpeg"
+  },
+  {
+    "id": "4",
+    "address": "1 Bird St",
+    "city": "Rock Hill",
+    "state": "SC",
+    "zip": "29730",
+    "price": 200000,
+    "beds": 1,
+    "baths": 1,
+    "sqft": 844,
+    "status": "Active",
+    "type": "Single Family",
+    "mls": "CAR1BIRD",
+    "description": "Charming 1-bedroom home in Rock Hill, SC. A great opportunity for first-time buyers or investors looking for an affordable, move-in ready property.",
+    "image": "/images/1BirdSt.jpeg"
   }
 ]

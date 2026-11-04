@@ -1,98 +1,116 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const C = {
-  navy:      "#0c0f24",
-  navyMid:   "#161929",
-  navyLight: "#1e2340",
-  blue:      "#506caa",
-  blueMid:   "#3d5a96",
-  blueLight: "#91a3c9",
+  navy:      "#F5F7FC",
+  navyMid:   "#FFFFFF",
+  navyLight: "#FFFFFF",
+  blue:      "#2563EB",
+  blueMid:   "#1D4ED8",
+  blueLight: "#3B6FEF",
   white:     "#ffffff",
-  offWhite:  "rgba(255,255,255,0.9)",
-  muted:     "rgba(255,255,255,0.5)",
-  faint:     "rgba(255,255,255,0.12)",
-  border:    "rgba(255,255,255,0.1)",
+  ink:       "#11162B",
+  offWhite:  "rgba(17,22,43,0.82)",
+  muted:     "rgba(17,22,43,0.6)",
+  faint:     "rgba(17,22,43,0.12)",
+  border:    "rgba(17,22,43,0.1)",
 };
 
 const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&family=Roboto:wght@100;400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300;800&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: ${C.navy};
-    color: ${C.white};
+    color: ${C.ink};
     -webkit-font-smoothing: antialiased;
   }
 
   /* ── NAV ── */
   .nav {
     position: sticky; top: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 16px 40px;
+    display: flex; align-items: center; gap: 28px;
+    padding: 20px 48px;
     background: ${C.navy};
     border-bottom: 1px solid ${C.border};
   }
   .nav-brand { display: flex; align-items: center; gap: 14px; }
-  .nav-brand-text { line-height: 1.2; }
+  .nav-brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.1; }
   .nav-brand-name {
     display: block;
     font-family: 'Manrope', sans-serif;
-    font-size: 15px; font-weight: 800;
-    letter-spacing: 0.5px; color: ${C.white};
+    font-size: 18px; font-weight: 800;
+    letter-spacing: 0.3px; color: ${C.ink}; white-space: nowrap;
   }
-  .nav-brand-sub {
+  .nav-brand-tag {
+    display: block; margin-top: 2px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: ${C.muted}; white-space: nowrap;
+  }
+  .nav-brand-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .nav-brand-exp { height: 13px; width: auto; }
+  .nav-brand-badge { height: 14px; width: auto; opacity: 0.7; }
+   {
     display: block;
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px; font-weight: 100;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 400;
     letter-spacing: 2px; text-transform: uppercase;
     color: ${C.muted};
   }
-  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links { display: flex; align-items: center; gap: 32px; flex: 1; justify-content: center; }
   .nav-link {
     font-size: 11px; font-weight: 400; letter-spacing: 2px;
     text-transform: uppercase; color: ${C.muted};
     background: none; border: none; cursor: pointer; transition: color 0.2s;
   }
-  .nav-link:hover { color: ${C.white}; }
+  .nav-link:hover { color: ${C.ink}; }
   .nav-phone {
     font-family: 'Manrope', sans-serif;
-    font-size: 15px; font-weight: 800;
-    color: ${C.white}; text-decoration: none;
-    transition: color 0.2s;
+    font-size: 22px; font-weight: 800;
+    color: ${C.ink}; text-decoration: none;
+    transition: color 0.2s; white-space: nowrap;
   }
   .nav-phone:hover { color: ${C.blueLight}; }
+  .nav-cta-buttons { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
   .nav-cta {
     background: ${C.blue}; color: ${C.white};
     border: none; border-radius: 4px;
     padding: 9px 18px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 11px; font-weight: 400; letter-spacing: 2px;
     text-transform: uppercase; cursor: pointer; transition: background 0.2s;
     white-space: nowrap; text-decoration: none; display: inline-block;
   }
   .nav-cta:hover { background: ${C.blueMid}; }
   @media (max-width: 768px) {
-    .nav { padding: 12px 16px; }
-    .nav-links { gap: 8px; }
-    .nav-link { display: none; }
-    .nav-brand-name { font-size: 10px; letter-spacing: 0.3px; white-space: nowrap; }
-    .nav-brand-sub img { height: 10px; }
-    .nav-brand { gap: 8px; }
-    .nav-brand > img { height: 38px; width: 38px; }
-    .nav-brand-text { display: flex; flex-direction: column; justify-content: center; }
-    .nav-cta-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-    .nav-phone { font-size: 12px; }
-    .nav-cta { font-size: 10px; padding: 8px 12px; }
+    .nav { padding: 14px 18px; flex-wrap: wrap; row-gap: 12px; column-gap: 12px; }
+    .nav-brand { flex: 1; gap: 8px; }
+    .nav-links { display: none; }
+    .nav-brand-name { font-size: 16px; }
+    .nav-brand-tag { font-size: 9px; letter-spacing: 2.5px; }
+    .nav-brand-sub { gap: 6px; margin-top: 5px; }
+    .nav-brand-exp { height: 11px; }
+    .nav-brand-badge { height: 12px; }
+    .nav-brand > img { height: 44px !important; width: 44px !important; }
+    .nav-cta-buttons { flex: 0 0 100%; gap: 6px; flex-wrap: nowrap; }
+    .nav-cta { flex: 1; text-align: center; font-size: 10px; letter-spacing: 1px; padding: 9px 6px; }
+    .nav-phone {
+      flex: 0 0 100%; order: 3;
+      font-size: 20px; text-align: center;
+      padding: 10px 0; border-top: 1px solid ${C.border};
+    }
   }
 
   /* ── HERO ── */
   .hero {
     min-height: 90vh;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: flex-start;
+    display: flex; flex-direction: row;
+    justify-content: space-between; align-items: center;
+    gap: 48px;
     padding: 100px 40px 80px;
     position: relative; overflow: hidden;
   }
@@ -100,13 +118,23 @@ const styles = `
     content: '';
     position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse at 70% 30%, rgba(80,108,170,0.25) 0%, transparent 60%),
-      radial-gradient(ellipse at 5% 90%, rgba(80,108,170,0.1) 0%, transparent 50%);
+      radial-gradient(ellipse at 70% 30%, rgba(37,99,235,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 5% 90%, rgba(37,99,235,0.08) 0%, transparent 50%);
     pointer-events: none;
   }
-  .hero-eyebrow {
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px; font-weight: 100; letter-spacing: 4px;
+  .hero-content { position: relative; max-width: 580px; flex: 1 1 320px; min-width: 0; }
+  .hero-logo {
+    position: relative;
+    width: clamp(280px, 40vw, 600px); height: auto;
+    flex-shrink: 0; object-fit: contain;
+  }
+  @media (max-width: 900px) {
+    .hero { flex-direction: column-reverse; align-items: center; gap: 24px; text-align: left; }
+    .hero-logo { width: min(78vw, 360px); }
+  }
+   {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 400; letter-spacing: 4px;
     text-transform: uppercase; color: ${C.blueLight};
     margin-bottom: 28px;
     display: flex; align-items: center; gap: 14px;
@@ -119,7 +147,7 @@ const styles = `
     font-family: 'Manrope', sans-serif;
     font-size: clamp(44px, 7vw, 88px);
     font-weight: 800; line-height: 1.0;
-    color: ${C.white}; max-width: 660px;
+    color: ${C.ink}; max-width: 660px;
     margin-bottom: 20px; position: relative;
   }
   .hero-headline-sub {
@@ -130,33 +158,26 @@ const styles = `
     margin-bottom: 28px; position: relative;
   }
   .hero-sub {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 17px; font-weight: 400;
     color: ${C.muted}; max-width: 420px;
     line-height: 1.8; margin-bottom: 48px; position: relative;
   }
   .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; position: relative; }
-  .hero-headshot {
-    position: absolute; right: 0; bottom: 0;
-    height: 88%; width: auto;
-    object-fit: contain; object-position: bottom;
-    pointer-events: none; user-select: none;
-  }
-  @media (max-width: 900px) { .hero-headshot { display: none; } }
   @media (max-width: 600px) { .hero { padding: 80px 24px 60px; } }
 
   /* ── BUTTONS ── */
   .btn-primary {
     background: ${C.blue}; color: ${C.white};
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 12px; font-weight: 400; letter-spacing: 2.5px;
     text-transform: uppercase; padding: 16px 36px;
     border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s;
   }
   .btn-primary:hover { background: ${C.blueMid}; transform: translateY(-1px); }
   .btn-outline {
-    background: transparent; color: ${C.white};
-    font-family: 'Roboto', sans-serif;
+    background: transparent; color: ${C.ink};
+    font-family: 'Inter', sans-serif;
     font-size: 12px; font-weight: 400; letter-spacing: 2.5px;
     text-transform: uppercase; padding: 16px 36px;
     border: 1px solid ${C.border}; border-radius: 4px;
@@ -179,10 +200,10 @@ const styles = `
   .proof-num {
     font-family: 'Manrope', sans-serif;
     font-size: 18px; font-weight: 800;
-    color: ${C.white}; letter-spacing: 0.5px;
+    color: ${C.ink}; letter-spacing: 0.5px;
   }
-  .proof-label {
-    font-size: 10px; font-weight: 100; letter-spacing: 2px;
+   {
+    font-size: 10px; font-weight: 400; letter-spacing: 2px;
     text-transform: uppercase; color: ${C.muted}; margin-top: 6px;
   }
 
@@ -191,7 +212,7 @@ const styles = `
   .section-wrap { background: ${C.navyMid}; border-top: 1px solid ${C.border}; }
   .section-wrap-alt { background: ${C.navyLight}; border-top: 1px solid ${C.border}; }
   .eyebrow {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 10px; font-weight: 400; letter-spacing: 4px;
     text-transform: uppercase; color: ${C.blueLight};
     margin-bottom: 16px;
@@ -201,7 +222,7 @@ const styles = `
   .section-title {
     font-family: 'Manrope', sans-serif;
     font-size: clamp(26px, 3.5vw, 44px); font-weight: 800;
-    color: ${C.white}; margin-bottom: 8px; line-height: 1.1;
+    color: ${C.ink}; margin-bottom: 8px; line-height: 1.1;
   }
   .section-title-light {
     font-family: 'Manrope', sans-serif;
@@ -209,7 +230,7 @@ const styles = `
     color: ${C.blueLight}; margin-bottom: 16px; line-height: 1.3;
   }
   .section-sub {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 16px; font-weight: 400;
     color: ${C.muted}; max-width: 500px; line-height: 1.8;
   }
@@ -222,7 +243,7 @@ const styles = `
   }
   @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
   .about-body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 16px; font-weight: 400;
     color: ${C.muted}; line-height: 1.85; margin-top: 12px;
   }
@@ -277,7 +298,7 @@ const styles = `
   }
   .listing-card:hover {
     border-color: ${C.blueLight};
-    box-shadow: 0 4px 24px rgba(80,108,170,0.2);
+    box-shadow: 0 4px 24px rgba(37,99,235,0.2);
   }
   .listing-img {
     width: 100%; aspect-ratio: 16/9;
@@ -290,74 +311,95 @@ const styles = `
     text-transform: uppercase; padding: 5px 10px; border-radius: 3px;
   }
   .status-active { background: ${C.blue}; color: ${C.white}; }
-  .status-pending { background: rgba(255,255,255,0.1); color: ${C.muted}; }
+  .status-pending { background: rgba(17,22,43,0.85); color: #fff; }
   .status-sold { background: #2e7d4f; color: ${C.white}; }
+  .status-under-contract { background: #D4A017; color: #4A2E00; }
   .listing-body { padding: 22px 24px; }
   .listing-price {
     font-family: 'Manrope', sans-serif;
-    font-size: 24px; font-weight: 800; color: ${C.white}; margin-bottom: 4px;
+    font-size: 24px; font-weight: 800; color: ${C.ink}; margin-bottom: 4px;
   }
   .listing-address { font-size: 14px; font-weight: 400; color: ${C.muted}; margin-bottom: 10px; }
-  .listing-specs { font-size: 11px; font-weight: 100; color: ${C.blueLight}; letter-spacing: 0.5px; }
+   { font-size: 11px; font-weight: 400; color: ${C.blueLight}; letter-spacing: 0.5px; }
   .listing-cta {
     display: inline-block; margin-top: 16px;
     font-size: 11px; font-weight: 400; letter-spacing: 2px;
     text-transform: uppercase; color: ${C.blueLight};
     background: none; border: none; cursor: pointer; transition: color 0.2s; padding: 0;
   }
-  .listing-cta:hover { color: ${C.white}; }
+  .listing-cta:hover { color: ${C.ink}; }
 
   /* ── REVIEWS ── */
+  .reviews-wrap {
+    background: linear-gradient(180deg, rgba(37,99,235,0.06) 0%, ${C.navyLight} 55%);
+  }
+  .reviews-wrap .section { padding-top: 112px; padding-bottom: 112px; }
+  .reviews-wrap .section-title { font-size: clamp(30px, 4vw, 50px); }
   .reviews-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 18px; margin-top: 48px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 26px; margin-top: 56px;
   }
   .review-card {
-    background: ${C.navyLight}; border: 1px solid ${C.border};
-    border-radius: 6px; padding: 28px;
-    display: flex; flex-direction: column; gap: 16px;
-    transition: border-color 0.2s;
+    background: ${C.white}; border: 1px solid ${C.border};
+    border-radius: 10px; padding: 36px 32px;
+    display: flex; flex-direction: column; gap: 18px;
+    box-shadow: 0 4px 20px rgba(17,22,43,0.06);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   }
-  .review-card:hover { border-color: rgba(255,255,255,0.2); }
-  .review-stars { color: ${C.blue}; font-size: 15px; letter-spacing: 2px; }
+  .review-card:first-child {
+    border-color: rgba(37,99,235,0.35);
+    box-shadow: 0 8px 28px rgba(37,99,235,0.12);
+  }
+  .review-card:hover { transform: translateY(-3px); border-color: rgba(17,22,43,0.15); box-shadow: 0 10px 28px rgba(17,22,43,0.1); }
+  .review-stars { color: ${C.blue}; font-size: 18px; letter-spacing: 3px; }
   .review-quote {
-    font-size: 14px; font-weight: 400; color: ${C.muted};
-    line-height: 1.8; flex: 1;
+    font-size: 16px; font-weight: 400; color: ${C.offWhite};
+    line-height: 1.75; flex: 1;
   }
   .review-divider { height: 1px; background: ${C.border}; }
-  .review-name { font-size: 13px; font-weight: 400; color: ${C.white}; }
-  .review-meta { font-size: 11px; font-weight: 100; color: ${C.blueLight}; margin-top: 3px; }
-  .review-date { font-size: 10px; font-weight: 100; color: ${C.muted}; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
+  .review-name { font-size: 15px; font-weight: 600; color: ${C.ink}; }
+  .review-meta { font-size: 12px; font-weight: 500; color: ${C.blueLight}; margin-top: 4px; }
+  .review-date { font-size: 10px; font-weight: 400; color: ${C.muted}; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
   .reviews-score-row {
-    display: flex; align-items: center; gap: 14px;
-    margin-top: 40px; padding-top: 28px; border-top: 1px solid ${C.border};
+    display: flex; align-items: center; gap: 16px;
+    margin-top: 48px; padding-top: 32px; border-top: 1px solid ${C.border};
   }
   .reviews-score {
     font-family: 'Manrope', sans-serif;
-    font-size: 38px; font-weight: 800; color: ${C.white};
+    font-size: 52px; font-weight: 800; color: ${C.ink};
   }
-  .reviews-stars { font-size: 18px; color: ${C.blue}; letter-spacing: 3px; }
+  .reviews-stars { font-size: 22px; color: ${C.blue}; letter-spacing: 4px; }
+
+  /* ── FAQ ── */
+  .faq-list { margin-top: 40px; max-width: 760px; }
+  .faq-item { border-top: 1px solid ${C.border}; padding: 24px 0; }
+  .faq-item:last-child { border-bottom: 1px solid ${C.border}; }
+  .faq-q {
+    font-family: 'Manrope', sans-serif;
+    font-size: 17px; font-weight: 800; color: ${C.ink}; margin-bottom: 8px;
+  }
+  .faq-a {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 400; color: ${C.muted}; line-height: 1.8;
+  }
 
   /* ── VALUATION ── */
   .valuation-wrap {
-    background: ${C.blue};
-    border-top: 1px solid rgba(255,255,255,0.1);
+    background: #EEF3FF;
+    border-top: 1px solid ${C.border};
   }
   .valuation-inner { max-width: 620px; margin: 0 auto; padding: 96px 40px; }
-  .valuation-inner .eyebrow { color: rgba(255,255,255,0.6); }
-  .valuation-inner .eyebrow::before { background: rgba(255,255,255,0.4); }
-  .valuation-inner .section-title { color: ${C.white}; }
   .val-input {
     width: 100%;
     background: ${C.white};
-    border: none; color: #0c0f24;
-    font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 400;
+    border: 1px solid ${C.border}; color: #0c0f24;
+    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 400;
     padding: 13px 16px; outline: none; border-radius: 3px;
     transition: box-shadow 0.2s;
   }
   .val-input::placeholder { color: #999; }
-  .val-input:focus { box-shadow: 0 0 0 2px rgba(255,255,255,0.6); }
+  .val-input:focus { box-shadow: 0 0 0 2px ${C.blue}; }
   @media (max-width: 600px) { .valuation-inner { padding: 64px 24px; } }
 
   /* ── SURVEY ── */
@@ -380,7 +422,7 @@ const styles = `
   .type-btn {
     padding: 14px; border: 1px solid ${C.border};
     background: transparent; color: ${C.muted};
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 11px; font-weight: 400; letter-spacing: 2px;
     text-transform: uppercase; cursor: pointer; transition: all 0.2s; text-align: center;
     border-radius: 3px;
@@ -396,7 +438,7 @@ const styles = `
     width: 100%;
     background: ${C.white};
     border: none; color: #0c0f24;
-    font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 400;
+    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 400;
     padding: 13px 16px; outline: none; border-radius: 3px;
     transition: box-shadow 0.2s; appearance: none;
   }
@@ -417,7 +459,7 @@ const styles = `
   .form-divider { height: 1px; background: ${C.border}; margin: 28px 0; }
   .submit-btn {
     width: 100%; background: ${C.blue}; color: ${C.white};
-    font-family: 'Roboto', sans-serif; font-size: 12px; font-weight: 400;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 400;
     letter-spacing: 3px; text-transform: uppercase;
     padding: 18px; border: none; border-radius: 4px;
     cursor: pointer; margin-top: 12px; transition: all 0.2s;
@@ -429,19 +471,20 @@ const styles = `
   }
   .success-title {
     font-family: 'Manrope', sans-serif;
-    font-size: 28px; font-weight: 800; color: ${C.white}; margin-bottom: 12px;
+    font-size: 28px; font-weight: 800; color: ${C.ink}; margin-bottom: 12px;
   }
   .success-body { font-size: 15px; font-weight: 400; color: ${C.muted}; line-height: 1.8; }
   .required-star { color: #e05252; margin-left: 2px; }
 
   /* ── FOOTER ── */
   .footer {
-    background: #080a18; border-top: 1px solid ${C.border};
+    background: ${C.navyMid}; border-top: 1px solid ${C.border};
     padding: 36px 24px;
-    font-size: 11px; font-weight: 100;
-    color: rgba(255,255,255,0.3); letter-spacing: 0.5px;
+    font-size: 11px; font-weight: 400;
+    color: ${C.muted}; letter-spacing: 0.5px;
     text-align: center; line-height: 2;
   }
+  .footer a { color: ${C.blueLight}; }
   .footer-logos {
     display: flex; align-items: center; justify-content: center;
     gap: 14px; margin-top: 16px;
@@ -449,18 +492,31 @@ const styles = `
 `;
 
 const REVIEWS = [
+  { name: "Ron Sledzieski", role: "Seller", date: "2026", quote: "I've bought and sold many houses over my lifetime and I would say Michael is right up there in the top of agents I have worked with. First, his manner is chill, but helpful and on top of details. Second, his communication and weekly updates were EXCELLENT. Third, his incitefulness into the market and our particular situation were great to help us navigate a tricky situation. I recommend him without any reservation." },
+  { name: "Nana Sledzieski", role: "Seller", date: "2026", quote: "Michael came recommended by another realtor, who we had worked with for years. We were selling to a particular condo market and she felt he would be well-suited. As it turns out, Michael also excels at communication. From the first interaction to the last, he was commited to providing regular and detailed updates. He summarized the week's activity, gauged it to the market (local and hyperlocal), and gave us his recommendations. Whether the news was positive or negative, he framed it professionally and provided alternatives so we never felt our property was being overlooked or underappreciated. After a few months, we worked together across time zones, so he went out of his way to collect some items we had left in the care of friends." },
+  { name: "Ian Olson", role: "Seller", date: "2026", quote: "Mike did an awesome job selling two of my houses over the past month! In a very tough market, with houses that weren't \"ideal\" to some other realtors, he was able to get them both under contract quickly, and was firm in negotiations saving me tens of thousands. Communication was great, as was his knowledge and he wasn't afraid to advise me to lower the price even if it wasn't what I wanted to hear." },
+  { name: "Lord Jaggy", role: "Seller", date: "October 2026", source: "Google", quote: "Michael has been amazing to work with during the sale of our property! He was responsive, knowledgeable, on top of any issue that came up, and stayed in constant communication during the whole process. We would definitely work with Michael again for any future reality needs!" },
+  { name: "D M", role: "Client", date: "October 2026", source: "Google", quote: "Michael was a great pleasure to work with. He kept me advised of all the details through the entire process is very well informed and he was a great pleasure to work with and I would recommend him again to anyone in the area." },
   { name: "Fernando H.", role: "Buyer", date: "February 2026", quote: "We can't be more grateful to Michael for all the help he gave us in our first home purchase process. We never felt pressure and we always had accompaniment from him. We are looking forward to working with him again. 100% recommended!" },
-  { name: "Adrian G.", role: "Seller", date: "December 2025", quote: "Michael was the best realtor for the sale of our home and build of our new home. Couldn't have asked for a better experience." },
-  { name: "Kathy R.", role: "Buyer", date: "October 2025", quote: "Michael Azazi was very professional, knowledgeable and always available to help whenever needed. He was proactive and was always looking out for our best interest." },
   { name: "Amy B.", role: "Seller", date: "September 2025", quote: "Michael Azazi kept us updated on all events requested by our buyers. Michael was always professional, courteous and easy to work with; highly recommend." },
-  { name: "Kathy B.", role: "Facebook Review", date: "2025", quote: "He's very knowledgeable about real estate. He works hard for his clients to try and get everything they want and need. Kind and very easy to work with." },
-  { name: "Tim D.", role: "Facebook Review", date: "2025", quote: "I would recommend Michael highly. He is very ambitious and knowledgeable. He tries hard to get everything his clients need and want. He's very respectful and a go getter." },
+  { name: "Kathy R.", role: "Buyer", date: "October 2025", quote: "Michael Azazi was very professional, knowledgeable and always available to help whenever needed. He was proactive and was always looking out for our best interest." },
+  { name: "Adrian G.", role: "Seller", date: "December 2025", quote: "Michael was the best realtor for the sale of our home and build of our new home. Couldn't have asked for a better experience." },
+];
+
+const FAQS = [
+  { q: "What areas does Michael Azazi Real Estate serve?", a: "Michael Azazi is a REALTOR® with eXp Realty, licensed in North Carolina and South Carolina, serving buyers, sellers, and investors throughout the Charlotte Metro area." },
+  { q: "Does Michael Azazi handle probate and estate property sales?", a: "Yes. Michael holds a Certified Probate Expert (CPE) designation and helps families navigate the sale of inherited and estate properties in both North Carolina and South Carolina." },
+  { q: "Can Michael Azazi help sell a distressed or as-is property?", a: "Yes, distressed and as-is property sales are one of Michael's specialties, including homes that need repair or updating before they're market-ready." },
+  { q: "Is the home valuation really free?", a: "Yes. Michael provides a personalized home value estimate based on local market data and comparable sales, at no cost and with no obligation." },
+  { q: "Is Michael Azazi licensed in both North Carolina and South Carolina?", a: "Yes, Michael holds active real estate licenses in both states and is brokered by eXp Realty." },
+  { q: "How do I schedule a consultation?", a: "You can book a free buyer or seller consultation directly on the Schedule page, or call or text (704) 494-1953." },
 ];
 
 const LISTINGS = [
-  { id: 1, status: "Active", price: "$325,000", address: "4590 Deer Run, Rock Hill, NC 29732", specs: "3 bd · 2 ba · 1,893 sqft", image: "/images/4590DeerRun.jpeg", rep: null },
-  { id: 2, status: "Active", price: "$350,000", address: "404 W Kerr St, Salisbury, NC 28144", specs: "7 bd · 4 ba · 4,899 sqft", image: "/images/404WKerr.jpeg", rep: null },
-  { id: 3, status: "Active", price: "$250,000", address: "505 E 6th St #1003, Charlotte, NC 28202", specs: "1 bd · 1 ba · 774 sqft", image: "/images/505E6th.jpeg", rep: null },
+  { id: 1, status: "Sold", price: "$320,000", address: "4590 Deer Run, Rock Hill, SC 29732", specs: "3 bd · 2 ba · 1,893 sqft", image: "/images/4590DeerRun.jpeg", rep: "Seller" },
+  { id: 2, status: "Sold", price: "$381,000", address: "404 W Kerr St, Salisbury, NC 28144", specs: "7 bd · 4 ba · 4,899 sqft", image: "/images/404WKerr.jpeg", rep: "Buyer & Seller" },
+  { id: 3, status: "Sold", price: "$218,000", address: "505 E 6th St #1003, Charlotte, NC 28202", specs: "1 bd · 1 ba · 774 sqft", image: "/images/505E6th.jpeg", rep: "Seller" },
+  { id: 9, status: "Sold", price: "$175,000", address: "1 Bird St, Rock Hill, SC 29730", specs: "1 bd · 1 ba · 844 sqft", image: "/images/1BirdSt.jpeg", rep: "Seller" },
   { id: 4, status: "Sold", price: "$427,000", address: "101 Harvest Farm Ct", specs: "Sold $2k over ask price", image: "/images/sold-harvest-farm.jpg", rep: "Seller" },
   { id: 5, status: "Sold", price: "$408,280", address: "7669 Bainbridge Rd", specs: "New construction", image: "/images/sold-bainbridge.png", rep: "Buyer" },
   { id: 6, status: "Sold", price: "$285,000", address: "10307 Bunclody Dr", specs: "Purchased $2k under ask", image: "/images/sold-bunclody.png", rep: "Buyer" },
@@ -542,6 +598,12 @@ export default function App() {
   const [valuation, setValuation] = useState({ address: "", city: "", name: "", phone: "", email: "" });
   const [valuationSubmitted, setValuationSubmitted] = useState(false);
 
+  useEffect(() => {
+    if (window.location.hash === "#valuation") {
+      setTimeout(() => document.querySelector(".valuation-wrap")?.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
+    }
+  }, []);
+
   const questions = tab === "seller" ? sellerQuestions : buyerQuestions;
 
   const handleAnswer = (id, val) => setAnswers(prev => ({ ...prev, [id]: val }));
@@ -590,16 +652,15 @@ export default function App() {
           <img
             src="/images/logo.png"
             alt="Michael Azazi Real Estate"
-            style={{ height: 52, width: 52, borderRadius: "50%", objectFit: "cover", mixBlendMode: "screen", flexShrink: 0 }}
+            style={{ height: 52, width: 52, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
           />
           <div className="nav-brand-text">
-            <span className="nav-brand-name" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              Michael Azazi Real Estate
-              <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{ height: 16, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.7 }} />
-              <img src="/images/trans_realtor.png" alt="REALTOR®" style={{ height: 16, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.7 }} />
-            </span>
-            <span className="nav-brand-sub" style={{ display: "flex", alignItems: "center", gap: 5 }}>
-              <img src="/images/exp-logo-white.svg" alt="eXp Realty" style={{ height: 13, width: "auto" }} />
+            <span className="nav-brand-name">Michael Azazi</span>
+            <span className="nav-brand-tag">Real Estate</span>
+            <span className="nav-brand-sub">
+              <img className="nav-brand-exp" src="/images/eXp Realty - Black.svg.svg" alt="eXp Realty" />
+              <img className="nav-brand-badge" src="/images/equal.png" alt="Equal Housing Opportunity" />
+              <img className="nav-brand-badge" src="/images/trans_realtor.png" alt="REALTOR®" />
             </span>
           </div>
         </div>
@@ -608,30 +669,42 @@ export default function App() {
           <button className="nav-link" onClick={() => scrollTo(".reviews-wrap")}>Reviews</button>
           <button className="nav-link" onClick={() => scrollTo(".survey-wrap", "seller")}>Sell</button>
           <button className="nav-link" onClick={() => scrollTo(".survey-wrap", "buyer")}>Buy</button>
+          <Link to="/probate" className="nav-link" style={{ textDecoration: "none" }}>Probate</Link>
           <Link to="/schedule" className="nav-link" style={{ textDecoration: "none" }}>Schedule</Link>
-          <div className="nav-cta-wrap">
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
-              <a href="/schedule" className="nav-cta">Schedule a Consultation</a>
-              <button className="nav-cta" onClick={() => scrollTo(".valuation-wrap")}>Free Home Valuation</button>
-            </div>
-            <a href="tel:7044941953" className="nav-phone">(704) 494-1953</a>
-          </div>
+          <Link to="/videos" className="nav-link" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
+            Videos
+            <span style={{
+              fontSize: 8, letterSpacing: "1px", textTransform: "uppercase",
+              background: C.blue, color: C.white,
+              padding: "2px 7px", borderRadius: 10,
+              fontFamily: "'Inter', sans-serif", fontWeight: 400,
+              lineHeight: 1.6, flexShrink: 0,
+            }}>Soon</span>
+          </Link>
         </div>
+        <div className="nav-cta-buttons">
+          <a href="/schedule" className="nav-cta">Schedule a Consultation</a>
+          <button className="nav-cta" onClick={() => scrollTo(".valuation-wrap")}>Free Home Valuation</button>
+        </div>
+        <a href="tel:7044941953" className="nav-phone">(704) 494-1953</a>
       </nav>
 
       {/* HERO */}
       <section className="hero">
-        <p className="hero-eyebrow">Charlotte Metro · NC &amp; SC Licensed</p>
-        <h1 className="hero-headline">Your Move,</h1>
-        <p className="hero-headline-sub">Handled Right.</p>
-        <p className="hero-sub">
-          Whether you're ready to sell or ready to buy, you deserve a strategist in your corner — not a salesperson.
-        </p>
-        <div className="hero-ctas">
-          <button className="btn-primary" onClick={() => scrollTo(".survey-wrap", "seller")}>I Want to Sell</button>
-          <button className="btn-outline" onClick={() => scrollTo(".survey-wrap", "buyer")}>I Want to Buy</button>
+        <div className="hero-content">
+          <p className="hero-eyebrow">Charlotte Metro · NC &amp; SC Licensed</p>
+          <h1 className="hero-headline">Your Move,</h1>
+          <p className="hero-headline-sub">Handled Right.</p>
+          <p className="hero-sub">
+            Whether you're ready to sell, buy, or invest, you deserve a strategist in your corner — not a salesperson.
+          </p>
+          <div className="hero-ctas">
+            <button className="btn-primary" onClick={() => scrollTo(".survey-wrap", "seller")}>I Want to Sell</button>
+            <button className="btn-outline" onClick={() => scrollTo(".survey-wrap", "buyer")}>I Want to Buy</button>
+            <button className="btn-outline" onClick={() => scrollTo(".survey-wrap", "buyer")}>I Want to Invest</button>
+          </div>
         </div>
-        <img src="/images/headshot-removebg-preview.png" alt="Michael Azazi" className="hero-headshot" />
+        <img src="/images/logo-transparent.png?v=3" alt="Michael Azazi Real Estate logo" className="hero-logo" />
       </section>
 
       {/* PROOF STRIP */}
@@ -653,7 +726,7 @@ export default function App() {
           <div className="about-grid">
             <div>
               <p className="about-body">
-                Michael Azazi has been in the real estate industry since 2022, bringing a foundation built on years of property management experience. That background shaped everything: attention to detail, proactive communication, and a genuine commitment to solving problems before they become issues.
+                Michael Azazi's foundation in real estate began in 2015 managing properties — mostly parking operations — which built his eye for detail, proactive communication, and commitment to solving problems before they become issues. He became a REALTOR® in 2023, working on teams through 2025, before going independent in December 2025.
               </p>
               <p className="about-body" style={{ marginTop: 16 }}>
                 As a certified Real Estate Negotiation Expert (RENE), Certified Probate Expert (CPE), and Certified Listing Specialist (CLS), Michael brings specialized skills to every transaction. Based in Charlotte and licensed in both NC and SC.
@@ -709,8 +782,8 @@ export default function App() {
             {LISTINGS.filter(l => l.status !== "Sold").map(l => (
               <div key={l.id} className="listing-card">
                 <div className="listing-img">
-                  <span className={`listing-status status-${l.status.toLowerCase()}`}>{l.status}</span>
-                  <img src={l.image} alt={l.address} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  <span className={`listing-status status-${l.status.toLowerCase().replace(/\s+/g, '-')}`}>{l.status}</span>
+                  <img src={l.image} alt={`${l.status} home for sale` + (l.specs ? ` — ${l.specs}` : "") + ` at ${l.address}, listed by Michael Azazi Real Estate`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} loading="lazy" />
                 </div>
                 <div className="listing-body">
                   <div className="listing-price">{l.price}</div>
@@ -734,8 +807,8 @@ export default function App() {
             {LISTINGS.filter(l => l.status === "Sold").map(l => (
               <div key={l.id} className="listing-card">
                 <div className="listing-img">
-                  <span className={`listing-status status-${l.status.toLowerCase()}`}>{l.status}</span>
-                  <img src={l.image} alt={l.address} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  <span className={`listing-status status-${l.status.toLowerCase().replace(/\s+/g, '-')}`}>{l.status}</span>
+                  <img src={l.image} alt={`${l.status} home for sale` + (l.specs ? ` — ${l.specs}` : "") + ` at ${l.address}, listed by Michael Azazi Real Estate`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} loading="lazy" />
                 </div>
                 <div className="listing-body">
                   <div className="listing-price">{l.price}</div>
@@ -767,7 +840,7 @@ export default function App() {
                   <div className="review-date">{r.date}</div>
                   {r.role !== "Facebook Review" && (
                     <div style={{ marginTop: 6, fontSize: 10, fontWeight: 100, color: C.blueLight, letterSpacing: "1px", textTransform: "uppercase" }}>
-                      ✓ Verified by RealSatisfied
+                      {r.source === "Google" ? "✓ Google Review" : "✓ Verified by RealSatisfied"}
                     </div>
                   )}
                 </div>
@@ -781,8 +854,74 @@ export default function App() {
         </div>
       </div>
 
+      {/* LATEST VIDEO */}
+      <div className="section-wrap">
+        <div className="section">
+          <p className="eyebrow">Videos</p>
+          <h2 className="section-title">Watch & Learn</h2>
+          <p className="section-sub">Market insights, buyer and seller tips, probate, FSBO — straight from Michael.</p>
+          <div style={{
+            marginTop: 40,
+            background: C.navyLight,
+            border: `1px solid ${C.border}`,
+            borderRadius: 8,
+            padding: "60px 40px",
+            textAlign: "center",
+          }}>
+            <div style={{
+              width: 56, height: 56,
+              background: C.blue,
+              borderRadius: "50%",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              margin: "0 auto 20px",
+              fontSize: 22, color: C.white,
+            }}>
+              ▶
+            </div>
+            <p style={{
+              fontFamily: "'Manrope', sans-serif",
+              fontSize: 20, fontWeight: 800, color: C.ink, marginBottom: 10,
+            }}>
+              Videos Coming Soon
+            </p>
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 15, fontWeight: 400, color: C.muted,
+              lineHeight: 1.8, maxWidth: 440, margin: "0 auto 28px",
+            }}>
+              Michael is recording educational content covering the Charlotte market, probate real estate, FSBO, and more.
+            </p>
+            <Link to="/videos" style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 11, fontWeight: 400, letterSpacing: "2px",
+              textTransform: "uppercase", color: C.blueLight,
+              textDecoration: "none",
+            }}>
+              Browse All Videos →
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <div className="section-wrap-alt">
+        <div className="section">
+          <p className="eyebrow">FAQ</p>
+          <h2 className="section-title">Common Questions</h2>
+          <p className="section-sub">Straight answers about working with Michael in the Charlotte Metro area.</p>
+          <div className="faq-list">
+            {FAQS.map((f, i) => (
+              <div key={i} className="faq-item">
+                <div className="faq-q">{f.q}</div>
+                <div className="faq-a">{f.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* VALUATION */}
-      <div className="valuation-wrap">
+      <div className="valuation-wrap" id="valuation">
         <div className="valuation-inner">
           {valuationSubmitted ? (
             <div style={{ textAlign: "center" }}>
@@ -793,7 +932,7 @@ export default function App() {
             <>
               <p className="eyebrow">Free Home Valuation</p>
               <h2 className="section-title">What Is Your Home Worth?</h2>
-              <p style={{ fontSize: 16, fontWeight: 400, color: "rgba(255,255,255,0.75)", lineHeight: 1.8, marginBottom: 36, marginTop: 12 }}>
+              <p style={{ fontSize: 16, fontWeight: 400, color: C.muted, lineHeight: 1.8, marginBottom: 36, marginTop: 12 }}>
                 Enter your address and I'll send you a personalized home value analysis within 24 hours — no automated tools, just real local expertise.
               </p>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
@@ -803,7 +942,7 @@ export default function App() {
                 <input className="val-input" placeholder="Phone number" value={valuation.phone} onChange={e => handleValChange("phone", e.target.value)} />
                 <input className="val-input" style={{ gridColumn: "1 / -1" }} placeholder="Email address" value={valuation.email} onChange={e => handleValChange("email", e.target.value)} />
               </div>
-              <button className="btn-primary" style={{ marginTop: 20, width: "100%", background: C.navy }} onClick={handleValSubmit}>
+              <button className="btn-primary" style={{ marginTop: 20, width: "100%", background: C.ink }} onClick={handleValSubmit}>
                 Get My Home Value →
               </button>
             </>
@@ -856,14 +995,13 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="footer">
-        <div>Michael Azazi Real Estate · Brokered by eXp Realty · Charlotte Metro · NC &amp; SC</div>
-        <div>eXp Realty: <a href="tel:7042488230" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>(704) 248-8230</a></div>
-        <div><a href="tel:7044941953" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>(704) 494-1953</a> · <a href="mailto:michael@azazirealestate.com" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>michael@azazirealestate.com</a></div>
+        <div>Michael Azazi Real Estate · with eXp Realty · Charlotte Metro · NC &amp; SC</div>
+        <div><a href="tel:7044941953" style={{ textDecoration: "none" }}>(704) 494-1953</a> · <a href="mailto:michael@azazirealestate.com" style={{ textDecoration: "none" }}>michael@azazirealestate.com</a></div>
         <div>Not intended to solicit currently listed properties or buyers under existing representation agreements</div>
         <div>Opinions are my own and not the views of eXp Realty</div>
         <div className="footer-logos">
-          <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{ height: 32, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.35 }} />
-          <img src="/images/trans_realtor.png" alt="REALTOR®" style={{ height: 32, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.35 }} />
+          <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{ height: 32, width: "auto", opacity: 0.55 }} />
+          <img src="/images/trans_realtor.png" alt="REALTOR®" style={{ height: 32, width: "auto", opacity: 0.55 }} />
         </div>
       </footer>
     </>

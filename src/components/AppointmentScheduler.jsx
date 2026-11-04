@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useDocMeta from "../useDocMeta";
 
 const TIME_SLOTS = [];
 for (let hour = 9; hour <= 19; hour++) {
@@ -25,9 +26,12 @@ function getDaysFromToday(count) {
 }
 
 export default function AppointmentScheduler() {
+  useDocMeta(
+    "Schedule a Free Consultation | Michael Azazi Real Estate",
+    "Book a free buyer or seller consultation with Michael Azazi, REALTOR® with eXp Realty serving the Charlotte Metro area, licensed in NC & SC."
+  );
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const source = searchParams.get("source") || "";
+  const [type, setType] = useState("seller");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -44,19 +48,35 @@ export default function AppointmentScheduler() {
       setError("Please fill out all fields before continuing.");
       return;
     }
-    const params = new URLSearchParams({ name, phone, email, address, date, time });
-    if (source) params.set("source", source);
+    const params = new URLSearchParams({ type, name, phone, email, address, date, time });
     navigate(`/prequal?${params.toString()}`);
   }
 
   return (
     <section style={{ maxWidth: 560, margin: "0 auto", padding: "2rem 1.5rem" }}>
       <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "0.5rem" }}>
-        Schedule Your Free Home Selling Consultation
+        Schedule Your Free Consultation
       </h2>
       <p style={{ color: "#555", marginBottom: "1.5rem" }}>
         Pick a time that works for you — Mon through Sun, 9am to 8pm. We'll spend about an hour together and you'll leave with a clear plan.
       </p>
+
+      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1.5rem" }}>
+        <button
+          type="button"
+          onClick={() => { setType("seller"); setAddress(""); }}
+          style={{ ...toggleStyle, ...(type === "seller" ? toggleActiveStyle : {}) }}
+        >
+          I'm Selling
+        </button>
+        <button
+          type="button"
+          onClick={() => { setType("buyer"); setAddress(""); }}
+          style={{ ...toggleStyle, ...(type === "buyer" ? toggleActiveStyle : {}) }}
+        >
+          I'm Buying
+        </button>
+      </div>
 
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <input
@@ -82,7 +102,7 @@ export default function AppointmentScheduler() {
         />
         <input
           type="text"
-          placeholder="Property address"
+          placeholder={type === "seller" ? "Property address" : "Area or zip code you're targeting"}
           value={address}
           onChange={e => setAddress(e.target.value)}
           style={inputStyle}
@@ -117,6 +137,25 @@ const inputStyle = {
   borderRadius: "6px",
   width: "100%",
   boxSizing: "border-box",
+};
+
+const toggleStyle = {
+  flex: 1,
+  padding: "0.65rem 1rem",
+  fontSize: "0.95rem",
+  fontWeight: 600,
+  border: "1px solid #ddd",
+  borderRadius: "6px",
+  cursor: "pointer",
+  backgroundColor: "#fff",
+  color: "#555",
+  transition: "all 0.15s",
+};
+
+const toggleActiveStyle = {
+  backgroundColor: "#1a1a1a",
+  color: "#fff",
+  borderColor: "#1a1a1a",
 };
 
 const buttonStyle = {
