@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+const SOURCE_LABELS = {
+  probate: "Probate video page",
+  expired: "Expired listing video page",
+  fsbo: "FSBO video page",
+};
+
 export default function PreQualification() {
   const [searchParams] = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
@@ -14,6 +20,7 @@ export default function PreQualification() {
     address: searchParams.get("address") || "",
     date: searchParams.get("date") || "",
     time: searchParams.get("time") || "",
+    source: searchParams.get("source") || "",
   };
 
   const [form, setForm] = useState({
@@ -48,6 +55,7 @@ Email: ${prefill.email}
 Property: ${prefill.address}
 Date: ${prefill.date}
 Time: ${prefill.time}
+Lead source: ${SOURCE_LABELS[prefill.source] || "Website"}
 
 --- PRE-QUALIFICATION ---
 Why selling: ${form.whySelling}
@@ -71,7 +79,7 @@ Working with another agent: ${form.workingWithAgent}
         body: JSON.stringify({
           from: "appointments@azazirealestate.com",
           to: "michael@azazirealestate.com",
-          subject: `New Appointment Request — ${prefill.name} — ${prefill.date} at ${prefill.time}`,
+          subject: `New Appointment Request${prefill.source ? ` (${SOURCE_LABELS[prefill.source] || prefill.source})` : ""} — ${prefill.name} — ${prefill.date} at ${prefill.time}`,
           text: emailBody,
         }),
       });

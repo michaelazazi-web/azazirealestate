@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const TIME_SLOTS = [];
 for (let hour = 9; hour <= 19; hour++) {
@@ -26,6 +26,8 @@ function getDaysFromToday(count) {
 
 export default function AppointmentScheduler() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const source = searchParams.get("source") || "";
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -43,6 +45,7 @@ export default function AppointmentScheduler() {
       return;
     }
     const params = new URLSearchParams({ name, phone, email, address, date, time });
+    if (source) params.set("source", source);
     navigate(`/prequal?${params.toString()}`);
   }
 
