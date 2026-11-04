@@ -17,30 +17,25 @@ const C = {
 
 const VIDEOS = [
   {
-    id: 1,
-    title: "Charlotte Real Estate Market Update",
-    description: "What buyers and sellers need to know about the current Charlotte Metro market.",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    id: "expired",
+    title: "Why Your Home Didn't Sell (and How to Fix It)",
+    description: "If your listing expired, here's what most sellers never get told about why homes sit, and what to do differently next time.",
+    youtubeUrl: "https://www.youtube-nocookie.com/embed/VGuz9-cQqeU?rel=0&modestbranding=1&playsinline=1",
+    page: "/home-didnt-sell",
     category: "general",
   },
   {
-    id: 2,
-    title: "Navigating Probate Real Estate in NC",
-    description: "A step-by-step guide to selling inherited or estate properties in North Carolina.",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    category: "probate",
-  },
-  {
-    id: 3,
-    title: "FSBO vs. Using a Realtor: The Honest Truth",
-    description: "What For Sale By Owner sellers gain — and give up — compared to hiring a professional.",
-    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    id: "fsbo",
+    title: "What FSBO Sellers Need to Know",
+    description: "Selling your home yourself? What to watch for on pricing, positioning, and negotiating so you decide with clarity.",
+    youtubeUrl: "https://www.youtube-nocookie.com/embed/pYEMvmLkX3Y?rel=0&modestbranding=1&playsinline=1",
+    page: "/selling-on-your-own",
     category: "fsbo",
   },
 ];
 
 const TABS = [
-  { key: "general", label: "General" },
+  { key: "general", label: "Selling" },
   { key: "probate", label: "Probate" },
   { key: "fsbo", label: "FSBO" },
 ];
@@ -107,30 +102,6 @@ export default function Videos() {
         </a>
       </header>
 
-      {/* Coming Soon Banner */}
-      <div className="vid-banner" style={{
-        background: "#EEF3FF",
-        padding: "20px 24px",
-        textAlign: "center",
-        borderBottom: `1px solid ${C.border}`,
-      }}>
-        <p style={{
-          fontFamily: "'Roboto', sans-serif",
-          fontSize: 11, fontWeight: 400, letterSpacing: "3px",
-          textTransform: "uppercase", color: C.blueLight,
-          marginBottom: 6,
-        }}>
-          ✦ Coming Soon
-        </p>
-        <p style={{
-          fontFamily: "'Roboto', sans-serif",
-          fontSize: 14, fontWeight: 400,
-          color: C.muted, lineHeight: 1.7, maxWidth: 560, margin: "0 auto",
-        }}>
-          Michael is actively recording educational videos for buyers, sellers, and anyone navigating probate or FSBO real estate in the Charlotte Metro. Check back soon.
-        </p>
-      </div>
-
       {/* Main */}
       <main className="vid-main" style={{ maxWidth: 1100, margin: "0 auto", padding: "64px 40px" }}>
 
@@ -189,6 +160,14 @@ export default function Videos() {
           ))}
         </div>
 
+        {filtered.length === 0 && (
+          <div style={{ background: C.navyLight, border: `1px solid ${C.border}`, borderRadius: 8, padding: "48px 32px", textAlign: "center" }}>
+            <p style={{ fontFamily: "'Manrope', sans-serif", fontSize: 18, fontWeight: 800, color: C.ink, marginBottom: 10 }}>Probate video coming soon</p>
+            <p style={{ fontSize: 15, color: C.muted, lineHeight: 1.7, marginBottom: 20 }}>In the meantime, the probate guide walks through how inherited property sales work in NC and SC.</p>
+            <Link to="/probate" style={{ fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", color: C.blue, textDecoration: "none" }}>Read the Probate Guide →</Link>
+          </div>
+        )}
+
         {/* Video grid */}
         <div style={{
           display: "grid",
@@ -230,6 +209,9 @@ export default function Videos() {
                 }}>
                   {video.description}
                 </p>
+                <Link to={video.page} style={{ display: "inline-block", marginTop: 14, fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", color: C.blue, textDecoration: "none" }}>
+                  Watch &amp; Schedule a Call →
+                </Link>
               </div>
             </div>
           ))}

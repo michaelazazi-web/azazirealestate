@@ -2,6 +2,12 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDocMeta from "../useDocMeta";
 
+const SOURCE_LABELS = {
+  probate: "Probate video page",
+  expired: "Expired listing video page",
+  fsbo: "FSBO video page",
+};
+
 export default function PreQualification() {
   useDocMeta(
     "Tell Us About Your Move | Michael Azazi Real Estate",
@@ -20,6 +26,7 @@ export default function PreQualification() {
     address: searchParams.get("address") || "",
     date: searchParams.get("date") || "",
     time: searchParams.get("time") || "",
+    source: searchParams.get("source") || "",
   };
 
   const isBuyer = prefill.type === "buyer";
@@ -72,6 +79,7 @@ Email: ${prefill.email}
 Target area: ${prefill.address}
 Date: ${prefill.date}
 Time: ${prefill.time}
+Lead source: ${SOURCE_LABELS[prefill.source] || "Website"}
 
 --- BUYER INFO ---
 Why buying: ${buyerForm.whyBuying}
@@ -93,6 +101,7 @@ Email: ${prefill.email}
 Property: ${prefill.address}
 Date: ${prefill.date}
 Time: ${prefill.time}
+Lead source: ${SOURCE_LABELS[prefill.source] || "Website"}
 
 --- SELLER INFO ---
 Why selling: ${sellerForm.whySelling}
@@ -116,7 +125,7 @@ Working with another agent: ${sellerForm.workingWithAgent}
         body: JSON.stringify({
           from: "appointments@azazirealestate.com",
           to: "michael@azazirealestate.com",
-          subject: `New Appointment Request — ${prefill.name} — ${prefill.date} at ${prefill.time}`,
+          subject: `New Appointment Request${prefill.source ? ` (${SOURCE_LABELS[prefill.source] || prefill.source})` : ""} — ${prefill.name} — ${prefill.date} at ${prefill.time}`,
           text: emailBody,
         }),
       });

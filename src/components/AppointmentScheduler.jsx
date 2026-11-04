@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useDocMeta from "../useDocMeta";
 
 const TIME_SLOTS = [];
@@ -31,6 +31,8 @@ export default function AppointmentScheduler() {
     "Book a free buyer or seller consultation with Michael Azazi, REALTOR® with eXp Realty serving the Charlotte Metro area, licensed in NC & SC."
   );
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const source = searchParams.get("source") || "";
   const [type, setType] = useState("seller");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -49,6 +51,7 @@ export default function AppointmentScheduler() {
       return;
     }
     const params = new URLSearchParams({ type, name, phone, email, address, date, time });
+    if (source) params.set("source", source);
     navigate(`/prequal?${params.toString()}`);
   }
 

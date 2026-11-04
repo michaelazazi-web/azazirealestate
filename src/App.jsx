@@ -671,16 +671,7 @@ export default function App() {
           <button className="nav-link" onClick={() => scrollTo(".survey-wrap", "buyer")}>Buy</button>
           <Link to="/probate" className="nav-link" style={{ textDecoration: "none" }}>Probate</Link>
           <Link to="/schedule" className="nav-link" style={{ textDecoration: "none" }}>Schedule</Link>
-          <Link to="/videos" className="nav-link" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
-            Videos
-            <span style={{
-              fontSize: 8, letterSpacing: "1px", textTransform: "uppercase",
-              background: C.blue, color: C.white,
-              padding: "2px 7px", borderRadius: 10,
-              fontFamily: "'Inter', sans-serif", fontWeight: 400,
-              lineHeight: 1.6, flexShrink: 0,
-            }}>Soon</span>
-          </Link>
+          <Link to="/videos" className="nav-link" style={{ textDecoration: "none" }}>Videos</Link>
         </div>
         <div className="nav-cta-buttons">
           <a href="/schedule" className="nav-cta">Schedule a Consultation</a>
@@ -860,43 +851,33 @@ export default function App() {
           <p className="eyebrow">Videos</p>
           <h2 className="section-title">Watch & Learn</h2>
           <p className="section-sub">Market insights, buyer and seller tips, probate, FSBO — straight from Michael.</p>
-          <div style={{
-            marginTop: 40,
-            background: C.navyLight,
-            border: `1px solid ${C.border}`,
-            borderRadius: 8,
-            padding: "60px 40px",
-            textAlign: "center",
-          }}>
-            <div style={{
-              width: 56, height: 56,
-              background: C.blue,
-              borderRadius: "50%",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              margin: "0 auto 20px",
-              fontSize: 22, color: C.white,
-            }}>
-              ▶
-            </div>
-            <p style={{
-              fontFamily: "'Manrope', sans-serif",
-              fontSize: 20, fontWeight: 800, color: C.ink, marginBottom: 10,
-            }}>
-              Videos Coming Soon
-            </p>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 15, fontWeight: 400, color: C.muted,
-              lineHeight: 1.8, maxWidth: 440, margin: "0 auto 28px",
-            }}>
-              Michael is recording educational content covering the Charlotte market, probate real estate, FSBO, and more.
-            </p>
-            <Link to="/videos" style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 11, fontWeight: 400, letterSpacing: "2px",
-              textTransform: "uppercase", color: C.blueLight,
-              textDecoration: "none",
-            }}>
+          <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+            {[
+              { id: "VGuz9-cQqeU", title: "Why Your Home Didn't Sell (and How to Fix It)", page: "/home-didnt-sell" },
+              { id: "pYEMvmLkX3Y", title: "What FSBO Sellers Need to Know", page: "/selling-on-your-own" },
+            ].map(v => (
+              <div key={v.id} style={{ background: C.navyLight, border: `1px solid ${C.border}`, borderRadius: 8, overflow: "hidden" }}>
+                <div style={{ position: "relative", paddingBottom: "56.25%", background: "#0c0f24" }}>
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1&playsinline=1`}
+                    title={v.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
+                  />
+                </div>
+                <div style={{ padding: "20px 24px" }}>
+                  <p style={{ fontFamily: "'Manrope', sans-serif", fontSize: 17, fontWeight: 800, color: C.ink, marginBottom: 10, lineHeight: 1.3 }}>{v.title}</p>
+                  <Link to={v.page} style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", color: C.blueLight, textDecoration: "none" }}>
+                    Watch &amp; Schedule a Call →
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 28, textAlign: "center" }}>
+            <Link to="/videos" style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: "2px", textTransform: "uppercase", color: C.blueLight, textDecoration: "none" }}>
               Browse All Videos →
             </Link>
           </div>
@@ -995,7 +976,8 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="footer">
-        <div>Michael Azazi Real Estate · with eXp Realty · Charlotte Metro · NC &amp; SC</div>
+        <div>Michael Azazi Real Estate · Brokered by eXp Realty · Charlotte Metro · NC &amp; SC</div>
+        <div>eXp Realty: <a href="tel:7042488230" style={{ textDecoration: "none" }}>(704) 248-8230</a></div>
         <div><a href="tel:7044941953" style={{ textDecoration: "none" }}>(704) 494-1953</a> · <a href="mailto:michael@azazirealestate.com" style={{ textDecoration: "none" }}>michael@azazirealestate.com</a></div>
         <div>Not intended to solicit currently listed properties or buyers under existing representation agreements</div>
         <div>Opinions are my own and not the views of eXp Realty</div>
