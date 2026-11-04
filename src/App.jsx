@@ -614,7 +614,7 @@ export default function App() {
               <a href="/schedule" className="nav-cta">Schedule a Consultation</a>
               <button className="nav-cta" onClick={() => scrollTo(".valuation-wrap")}>Free Home Valuation</button>
             </div>
-            <a href="tel:7046593564" className="nav-phone">(704) 659-3564</a>
+            <a href="tel:7044941953" className="nav-phone">(704) 494-1953</a>
           </div>
         </div>
       </nav>
@@ -856,8 +856,9 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="footer">
-        <div>Michael Azazi Real Estate · with eXp Realty · Charlotte Metro · NC &amp; SC</div>
-        <div><a href="tel:7046593564" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>(704) 659-3564</a> · <a href="mailto:michael@azazirealestate.com" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>michael@azazirealestate.com</a></div>
+        <div>Michael Azazi Real Estate · Brokered by eXp Realty · Charlotte Metro · NC &amp; SC</div>
+        <div>eXp Realty: <a href="tel:7042488230" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>(704) 248-8230</a></div>
+        <div><a href="tel:7044941953" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>(704) 494-1953</a> · <a href="mailto:michael@azazirealestate.com" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>michael@azazirealestate.com</a></div>
         <div>Not intended to solicit currently listed properties or buyers under existing representation agreements</div>
         <div>Opinions are my own and not the views of eXp Realty</div>
         <div className="footer-logos">

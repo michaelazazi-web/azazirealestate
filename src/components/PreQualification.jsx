@@ -92,7 +92,7 @@ Working with another agent: ${form.workingWithAgent}
       setSubmitted(true);
     } catch (err) {
       console.error("Submission error:", err);
-      setError("Something went wrong. Please call or text me directly at (704) 659-3564.");
+      setError("Something went wrong. Please call or text me directly at (704) 494-1953.");
     } finally {
       setSubmitting(false);
     }
@@ -105,7 +105,7 @@ Working with another agent: ${form.workingWithAgent}
         <p style={{ color: "#555", marginTop: "1rem" }}>
           Your appointment is confirmed for <strong>{new Date(prefill.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} at {prefill.time}</strong>. I'll reach out to confirm before we meet. Talk soon.
         </p>
-        <p style={{ marginTop: "1rem", color: "#555" }}>— Michael Azazi · (704) 659-3564</p>
+        <p style={{ marginTop: "1rem", color: "#555" }}>— Michael Azazi · (704) 494-1953</p>
       </section>
     );
   }
