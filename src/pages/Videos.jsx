@@ -25,6 +25,14 @@ const VIDEOS = [
     category: "general",
   },
   {
+    id: "probate",
+    title: "Managing a Home During Probate",
+    description: "Recently lost a loved one and responsible for their home? How probate real estate works, what your options are, and how to avoid costly mistakes.",
+    youtubeUrl: "https://www.youtube-nocookie.com/embed/9IBRGvwgk5c?rel=0&modestbranding=1&playsinline=1",
+    page: "/probate-video",
+    category: "probate",
+  },
+  {
     id: "fsbo",
     title: "What FSBO Sellers Need to Know",
     description: "Selling your home yourself? What to watch for on pricing, positioning, and negotiating so you decide with clarity.",

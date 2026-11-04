@@ -850,8 +850,9 @@ export default function App() {
           <p className="eyebrow">Videos</p>
           <h2 className="section-title">Watch & Learn</h2>
           <p className="section-sub">Market insights, buyer and seller tips, probate, FSBO — straight from Michael.</p>
-          <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+          <div style={{ marginTop: 40, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
             {[
+              { id: "9IBRGvwgk5c", title: "Managing a Home During Probate", page: "/probate-video" },
               { id: "VGuz9-cQqeU", title: "Why Your Home Didn't Sell (and How to Fix It)", page: "/home-didnt-sell" },
               { id: "pYEMvmLkX3Y", title: "What FSBO Sellers Need to Know", page: "/selling-on-your-own" },
             ].map(v => (

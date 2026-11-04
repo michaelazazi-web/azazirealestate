@@ -8,7 +8,7 @@ import fsboTranscript from "../content/fsbo-transcript.txt?raw";
 // Until an ID is filled in, the page shows a "video coming soon" placeholder.
 const VIDEO_PAGES = {
   probate: {
-    youtubeId: "",
+    youtubeId: "9IBRGvwgk5c",
     indexable: false,
     title: "Handling a Loved One's Home Through Probate? | Michael Azazi Real Estate",
     eyebrow: "Probate Real Estate · Charlotte Metro",
