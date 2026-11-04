@@ -729,8 +729,7 @@ export default function App() {
               </div>
             </div>
             <div>
-              <img src="/images/SP.jpg" alt="Michael Azazi" style={{ maxWidth: 300, width: "100%", borderRadius: 8, display: "block" }} />
-              <p style={{ marginTop: 10, fontSize: 13, fontWeight: 100, color: C.muted, fontStyle: "italic" }}>Yes, that's really me.</p>
+              <img src="/images/headshot-michael-azazi.jpg" alt="Michael Azazi, REALTOR® with eXp Realty, Charlotte" style={{ maxWidth: 300, width: "100%", borderRadius: 8, display: "block" }} />
             </div>
           </div>
         </div>
