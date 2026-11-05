@@ -717,10 +717,10 @@ export default function App() {
           <div className="about-grid">
             <div>
               <p className="about-body">
-                Michael Azazi's foundation in real estate began in 2015 managing properties — mostly parking operations — which built his eye for detail, proactive communication, and commitment to solving problems before they become issues. He became a REALTOR® in 2023, working on teams through 2025, before going independent in December 2025.
+                Michael Azazi's foundation in leadership began in college, when he became a canvass manager for Carolina Building Group. He led teams of eight to twelve, trained new canvassers, and built the neighborhood routes that drove the company's appointment volume. He later moved into parking operations, rising from supervisor to operations manager to facility manager, where he led teams and carried full P&amp;L responsibility. Those years built his eye for detail, proactive communication, and commitment to solving problems before they become issues. He became a REALTOR® in 2023, worked on established teams to build his foundation, and went solo in 2025 as Michael Azazi Real Estate, brokered by eXp Realty.
               </p>
               <p className="about-body" style={{ marginTop: 16 }}>
-                As a certified Real Estate Negotiation Expert (RENE), Certified Probate Expert (CPE), and Certified Listing Specialist (CLS), Michael brings specialized skills to every transaction. Based in Charlotte and licensed in both NC and SC.
+                As a certified Real Estate Negotiation Expert (RENE), Certified Probate Expert (CPE), and Certified Listing Specialist (CLS), Michael brings specialized skills to every transaction, with a focus on probate and distressed properties. Based in Charlotte and licensed in both NC and SC.
               </p>
               <div style={{ marginTop: 28 }}>
                 <span className="badge">✦ Probate Certified</span>
