@@ -8,6 +8,7 @@ import PreQualification from './components/PreQualification.jsx'
 import Videos from './pages/Videos.jsx'
 import Probate from './pages/Probate.jsx'
 import VideoLanding from './components/VideoLanding.jsx'
+import JoinExp from './pages/JoinExp.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/probate-video" element={<VideoLanding page="probate" />} />
         <Route path="/home-didnt-sell" element={<VideoLanding page="expired" />} />
         <Route path="/selling-on-your-own" element={<VideoLanding page="fsbo" />} />
+        <Route path="/join-exp" element={<JoinExp />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

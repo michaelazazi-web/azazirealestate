@@ -12,6 +12,15 @@
 const FALLBACK_NOTIFY = 'michael.azazi@gmail.com'
 const ACCENT = '#19469D'
 
+const TYPE_LABELS = {
+  buyer:        '🏠 Buyer',
+  seller:       '💰 Seller',
+  'fsbo-guide': '📘 FSBO Guide Download',
+  'agent-call': '🤝 Agent Attraction Call Request',
+  mastermind:   '🚀 Monday Mastermind RSVP',
+}
+const typeLabel = (type) => TYPE_LABELS[type] || '💰 Seller'
+
 // Human-readable labels for every survey question id
 const LABELS = {
   // seller
@@ -38,6 +47,11 @@ const LABELS = {
   viewingTimes:    'Best times to view homes',
   dealBreakers:    'Must-have deal breakers',
   realtorQualities:'Qualities wanted in a realtor',
+  // agent attraction
+  agentStage:      'Career stage',
+  licensedStates:  'Licensed in',
+  bestTimes:       'Best times to talk',
+  agentQuestions:  'Questions to cover',
   // shared
   personality:     'Personality type',
   notes:           'Additional notes',
@@ -62,8 +76,7 @@ function answerRows(answers) {
 }
 
 function buildHtml({ id, timestamp, type, name, phone, email, answers }) {
-  const isBuyer = type === 'buyer'
-  const label = isBuyer ? '🏠 Buyer' : type === 'fsbo-guide' ? '📘 FSBO Guide Download' : '💰 Seller'
+  const label = typeLabel(type)
   const dateStr = new Date(timestamp).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })
 
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"></head>
@@ -134,7 +147,7 @@ export async function onRequestPost({ request, env }) {
     if (resendKey) {
       const toEmail   = env.NOTIFICATION_EMAIL || FALLBACK_NOTIFY
       const fromEmail = env.FROM_EMAIL || 'onboarding@resend.dev'
-      const subject   = `New ${type === 'buyer' ? '🏠 Buyer' : type === 'fsbo-guide' ? '📘 FSBO Guide Download' : '💰 Seller'} Lead — ${lead.name}`
+      const subject   = `New ${typeLabel(type)} Lead — ${lead.name}`
 
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',

@@ -476,6 +476,18 @@ const styles = `
   .success-body { font-size: 15px; font-weight: 400; color: ${C.muted}; line-height: 1.8; }
   .required-star { color: #e05252; margin-left: 2px; }
 
+  /* ── AGENT ATTRACTION BAND ── */
+  .nav-link-join { white-space: nowrap; color: ${C.blue}; font-weight: 600; border: 1px solid ${C.blue}; border-radius: 4px; padding: 7px 12px; }
+  .nav-link-join:hover { background: rgba(37,99,235,0.06); color: ${C.blue}; }
+  @media (max-width: 1400px) and (min-width: 769px) { .nav-links { gap: 16px; } .nav-phone { font-size: 16px; } }
+  .agents-band { background: ${C.navyLight}; border-top: 1px solid ${C.border}; padding: 56px 24px; }
+  .agents-band-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+  .agents-band-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: ${C.blue}; margin-bottom: 10px; }
+  .agents-band-title { font-family: 'Manrope', sans-serif; font-size: clamp(22px, 3vw, 30px); font-weight: 800; color: ${C.ink}; line-height: 1.2; margin-bottom: 8px; }
+  .agents-band-text { font-size: 15px; line-height: 1.7; color: ${C.muted}; max-width: 560px; }
+  .agents-band-btn { background: ${C.blue}; color: ${C.white}; text-decoration: none; border-radius: 4px; padding: 16px 32px; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; white-space: nowrap; }
+  .agents-band-btn:hover { background: ${C.blueMid}; }
+
   /* ── FOOTER ── */
   .footer {
     background: ${C.navyMid}; border-top: 1px solid ${C.border};
@@ -672,6 +684,7 @@ export default function App() {
           <Link to="/probate" className="nav-link" style={{ textDecoration: "none" }}>Probate</Link>
           <Link to="/schedule" className="nav-link" style={{ textDecoration: "none" }}>Schedule</Link>
           <Link to="/videos" className="nav-link" style={{ textDecoration: "none" }}>Videos</Link>
+          <Link to="/join-exp" className="nav-link nav-link-join" style={{ textDecoration: "none" }}>Join eXp</Link>
         </div>
         <div className="nav-cta-buttons">
           <a href="/schedule" className="nav-cta">Schedule a Consultation</a>
@@ -974,6 +987,18 @@ export default function App() {
         </div>
       </div>
 
+      {/* AGENT ATTRACTION */}
+      <section className="agents-band">
+        <div className="agents-band-inner">
+          <div>
+            <p className="agents-band-eyebrow">For Real Estate Agents</p>
+            <h2 className="agents-band-title">Build a Business You Actually Own.</h2>
+            <p className="agents-band-text">See why I chose eXp Realty and the FastForward Movement, book a confidential conversation, or sit in on a Monday Mastermind as my guest.</p>
+          </div>
+          <Link to="/join-exp" className="agents-band-btn">Join eXp</Link>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="footer">
         <div>Michael Azazi Real Estate · Brokered by eXp Realty · Charlotte Metro · NC &amp; SC</div>
@@ -981,6 +1006,7 @@ export default function App() {
         <div><a href="tel:7044941953" style={{ textDecoration: "none" }}>(704) 494-1953</a> · <a href="mailto:michael@azazirealestate.com" style={{ textDecoration: "none" }}>michael@azazirealestate.com</a></div>
         <div>Not intended to solicit currently listed properties or buyers under existing representation agreements</div>
         <div>Opinions are my own and not the views of eXp Realty</div>
+        <div><Link to="/join-exp" style={{ textDecoration: "none" }}>Agents: Join eXp with Michael</Link></div>
         <div className="footer-logos">
           <img src="/images/equal.png" alt="Equal Housing Opportunity" style={{ height: 32, width: "auto", opacity: 0.55 }} />
           <img src="/images/trans_realtor.png" alt="REALTOR®" style={{ height: 32, width: "auto", opacity: 0.55 }} />
