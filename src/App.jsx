@@ -518,7 +518,7 @@ const REVIEWS = [
 const FAQS = [
   { q: "What areas does Michael Azazi Real Estate serve?", a: "Michael Azazi is a REALTOR® with eXp Realty, licensed in North Carolina and South Carolina, serving buyers, sellers, and investors throughout the Charlotte Metro area." },
   { q: "Does Michael Azazi handle probate and estate property sales?", a: "Yes. Michael holds a Certified Probate Expert (CPE) designation and helps families navigate the sale of inherited and estate properties in both North Carolina and South Carolina." },
-  { q: "Can Michael Azazi help sell a distressed or as-is property?", a: "Yes, distressed and as-is property sales are one of Michael's specialties, including homes that need repair or updating before they're market-ready." },
+  { q: "Can Michael Azazi help sell a distressed or as-is property?", a: "Yes. Distressed and as-is property sales are a focus of Michael's business, including homes that need repair or updating before they're market-ready." },
   { q: "Is the home valuation really free?", a: "Yes. Michael provides a personalized home value estimate based on local market data and comparable sales, at no cost and with no obligation." },
   { q: "Is Michael Azazi licensed in both North Carolina and South Carolina?", a: "Yes, Michael holds active real estate licenses in both states and is brokered by eXp Realty." },
   { q: "How do I schedule a consultation?", a: "You can book a free buyer or seller consultation directly on the Schedule page, or call or text (704) 494-1953." },
