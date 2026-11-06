@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 // Until it's filled in, the page shows a "video coming soon" placeholder.
 const YOUTUBE_ID = "";
 
-const INCOME_DISCLOSURE_URL = "https://exprealty.com/income/";
 
 const C = {
   bg: "#F5F7FC",
@@ -22,11 +21,11 @@ const C = {
 const AUDIENCES = [
   {
     title: "Newly Licensed",
-    text: "You just passed the exam and every brokerage is pitching you. The first place you hang your license shapes your habits, your income, and your confidence. Choose a home that trains you, mentors you, and lets you grow into your own business from day one.",
+    text: "You just passed the exam and every brokerage is pitching you. The first place you hang your license shapes your habits, your skills, and your confidence. Choose a home that trains you, mentors you, and lets you grow into your own business from day one.",
   },
   {
     title: "Wondering Where Your Money Goes",
-    text: "You closed the deals, but after splits, franchise fees, desk fees, and royalties, the check looks smaller than the work you put in. At eXp the costs are published, the cap is fixed, and once you cap you keep 100% for the rest of your anniversary year.",
+    text: "You closed the deals, but between all the fees and line items, it's hard to tell what you're actually paying for. At eXp the costs are published up front, so you know exactly what it takes to run your business here.",
   },
   {
     title: "Building Someone Else's Business",
@@ -36,24 +35,8 @@ const AUDIENCES = [
 
 const BENEFITS = [
   {
-    title: "Keep More of What You Earn",
-    text: "An 80/20 split until you pay a $16,000 annual cap, then 100% commission for the rest of your anniversary year. No franchise fees, no royalty fees, no desk fees.",
-  },
-  {
-    title: "Costs You Can Actually See",
-    text: "A one-time $149 startup fee and an $85 monthly cloud brokerage fee, plus small per-transaction fees. Everything is published up front, so you can plan your business with real numbers.",
-  },
-  {
-    title: "Revenue Share",
-    text: "eXp shares 50% of its company dollar with agents who attract productive agents to the company. Built intentionally, it can become a second income stream that grows from helping other agents succeed. It is performance-based and never guaranteed.",
-  },
-  {
-    title: "Ownership, Not Just a Paycheck",
-    text: "eXp is publicly traded (NASDAQ: EXPI). Agents can earn stock awards for milestones like closing a first transaction, capping, and helping a sponsored agent close their first deal. You can also buy shares with part of each commission at a discount through the Agent Equity Program.",
-  },
-  {
-    title: "The ICON Award",
-    text: "Top producers who cap and meet production and cultural benchmarks can earn up to $16,000 in eXp stock in a year. For high performers, that can effectively return the cap as equity.",
+    title: "Simple, Published Costs",
+    text: "$85 a month for the cloud brokerage, plus a one-time $149 startup fee when you join. No surprise line items. I'll walk you through the full fee schedule, including per-transaction fees, on our call so you see the whole picture before you decide.",
   },
   {
     title: "Mentorship for New Agents",
@@ -81,7 +64,7 @@ const BENEFITS = [
   },
   {
     title: "Access to the Monday Mastermind",
-    text: "Sit in with a group of top-producing agents from across the country every Monday. Real conversations, real numbers, and real strategy. More on that below.",
+    text: "Sit in with top-producing agents from across the country every Monday at 1:00 PM Eastern. Real conversations and real strategy. More on that below.",
   },
 ];
 
@@ -100,7 +83,7 @@ const FFM_BENEFITS = [
   },
   {
     title: "Masterminds Built for Where You Are",
-    text: "Dedicated sessions for solo agents, team builders, operations and sales managers, agent attraction, women in leadership, and building wealth through real estate.",
+    text: "Dedicated sessions for solo agents, team builders, operations and sales managers, women in leadership, and agents who invest in real estate themselves.",
   },
   {
     title: "Playbooks You Don't Have to Build",
@@ -270,7 +253,7 @@ function CallForm() {
       </div>
       <textarea placeholder="Anything you want to make sure we cover? (optional)" value={f.values.agentQuestions} onChange={f.set("agentQuestions")} />
       <button type="submit" disabled={f.status === "sending"}>{f.status === "sending" ? "One moment..." : "Request a Conversation"}</button>
-      <small>A confidential, no-pressure conversation. I'll never contact your current broker, and you can opt out of follow-up anytime.</small>
+      <small>A confidential, no-pressure conversation. I'll never contact your current broker. By submitting, you agree Michael Azazi may contact you by phone, text, or email about this request. Consent is not a condition of anything. Message and data rates may apply. Reply STOP to opt out of texts anytime.</small>
     </form>
   );
 }
@@ -281,7 +264,7 @@ function MastermindForm() {
     return (
       <div className="jx-done">
         <p><strong>You're on the list, {f.values.name.split(" ")[0]}.</strong></p>
-        <p>I'll personally send you the details and the link for an upcoming Monday session. Come ready to listen, take notes, and ask questions.</p>
+        <p>I'll personally send you the access details and password for an upcoming Monday session at 1:00 PM Eastern. Come ready to listen, take notes, and ask questions.</p>
       </div>
     );
   }
@@ -299,7 +282,7 @@ function MastermindForm() {
       </select>
       <input type="text" placeholder="State(s) licensed in" value={f.values.licensedStates} onChange={f.set("licensedStates")} />
       <button type="submit" disabled={f.status === "sending"}>{f.status === "sending" ? "One moment..." : "Save My Seat"}</button>
-      <small>Free to attend as my guest. No commitment to join eXp, ever.</small>
+      <small>Free to attend as my guest. No commitment to join eXp, ever. By submitting, you agree Michael Azazi may contact you by phone, text, or email about the mastermind. Message and data rates may apply. Reply STOP to opt out anytime.</small>
     </form>
   );
 }
@@ -310,7 +293,7 @@ export default function JoinExp() {
     document.title = "Join eXp Realty with Michael Azazi | Charlotte Metro, NC & SC";
     const desc = document.createElement("meta");
     desc.name = "description";
-    desc.content = "Thinking about eXp Realty? Learn how the cap, revenue share, stock awards, and culture work, book a confidential call with Michael Azazi, or sit in on a Monday Mastermind as a guest.";
+    desc.content = "Thinking about eXp Realty? See what the brokerage and the FastForward Movement offer, book a confidential call with Michael Azazi, or sit in on a Monday Mastermind as a guest.";
     document.head.appendChild(desc);
     window.scrollTo(0, 0);
     return () => {
@@ -344,7 +327,7 @@ export default function JoinExp() {
           {/* 1. HERO */}
           <p className="jx-eyebrow">For Real Estate Agents · NC &amp; SC</p>
           <h1 className="jx-headline">Build a Business You Actually Own.</h1>
-          <p className="jx-sub">Keep more of what you earn, learn from agents who share everything, and build something that keeps paying you back.</p>
+          <p className="jx-sub">Learn from agents who share everything, own your brand, and build your business your way.</p>
           <p className="jx-intro">
             Whether you just got licensed, you're tired of wondering where your commission went, or you've realized you've been building someone else's business, you deserve a straight answer about your options. Here's why I chose eXp Realty, and why I think it's worth a real look.
           </p>
@@ -390,7 +373,7 @@ export default function JoinExp() {
             <p className="jx-eyebrow">Why eXp</p>
             <h2 className="jx-h2">What You Get When You Join</h2>
             <p className="jx-lede">A brokerage model built around the agent. Here's what that means in practice.</p>
-            <div className="jx-grid">
+            <div className="jx-grid4">
               {BENEFITS.map((b, i) => (
                 <div className="jx-card" key={b.title}>
                   <p className="jx-num">{String(i + 1).padStart(2, "0")}</p>
@@ -426,9 +409,11 @@ export default function JoinExp() {
                 <span className="jx-badge">Free Guest Access</span>
                 <h2 className="jx-h2">Sit In on a Monday Mastermind</h2>
                 <p className="jx-lede" style={{ marginBottom: 0 }}>
-                  Every Monday I meet with a group of top-producing agents from across the country through the FastForward Movement at eXp. You're invited to join as my guest, free, with no obligation to ever switch brokerages. Consider it my way of adding value before you make any decision.
+                  Every Monday at 1:00 PM Eastern, I meet with top-producing agents from across the country through the FastForward Movement at eXp. Guests are welcome, and you're invited to join as mine, free, with no obligation to ever switch brokerages. Consider it my way of adding value before you make any decision.
                 </p>
                 <ul>
+                  <li><strong>When:</strong> Mondays at 1:00 PM Eastern</li>
+                  <li><strong>How:</strong> RSVP below and I'll send you the access details and password</li>
                   <li>Hear what's working right now from agents producing at a high level</li>
                   <li>Real talk on lead generation, listings, pricing, and running your business</li>
                   <li>Ask your own questions and leave with something you can use this week</li>
@@ -449,9 +434,9 @@ export default function JoinExp() {
                   No pitch deck and no pressure. We'll look at where you are, where you want to go, and whether eXp actually fits. If it doesn't, I'll tell you.
                 </p>
                 <ul>
-                  <li>Walk through your real numbers: split, fees, and what you take home today</li>
-                  <li>Understand how the cap, stock awards, and revenue share work, including the parts most people skip</li>
-                  <li>Get honest answers about the transition, your listings, and your license</li>
+                  <li>Talk through your goals and what you want your business to look like</li>
+                  <li>Walk through eXp's full fee schedule and how the brokerage works, with nothing glossed over</li>
+                  <li>Get honest answers about the transition and your license</li>
                 </ul>
               </div>
               <CallForm />
@@ -474,13 +459,13 @@ export default function JoinExp() {
           {/* 8. DISCLOSURE */}
           <section className="jx-disclosure">
             <p>
-              <strong>Income disclosure.</strong> Earnings at eXp Realty are performance-based and not guaranteed. Most participants earn supplemental or no income from revenue share, and gross compensation does not reflect the business expenses required to run a real estate practice. For average agent earnings and full details, see eXp Realty's <a href={INCOME_DISCLOSURE_URL} target="_blank" rel="noopener noreferrer">Income Disclosure</a>.
+              This page describes eXp Realty's brokerage services, training, and community. It makes no promises about income or results. Every agent's business is different, and success depends on your own effort, market, and skills.
             </p>
             <p>
-              Fees, commission structures, stock award programs, and revenue share plans are set by eXp Realty and eXp World Holdings, are subject to change, and may be modified or discontinued at the company's discretion. Stock awards are subject to vesting requirements. Nothing on this page is investment, tax, or legal advice.
+              Fees, programs, and services are set by eXp Realty, are subject to change, and are current as of November 2026. The FastForward Movement is an agent-led community within eXp Realty; mastermind schedules and access may change. Nothing on this page is legal, tax, or financial advice.
             </p>
             <p>
-              This page is not intended to interfere with any agent's existing independent contractor or employment agreement. Opinions are my own and not the views of eXp Realty.
+              This page is not intended to solicit agents in a way that interferes with any existing independent contractor or employment agreement. Opinions are my own and not the views of eXp Realty.
             </p>
           </section>
         </main>
